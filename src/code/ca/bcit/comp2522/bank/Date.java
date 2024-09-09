@@ -94,13 +94,6 @@ public class Date {
         return dayOfTheWeekToString(number % daysInWeek);
     }
 
-    /**
-     * Returns string representation of date in YYYY-MM-DD format.
-     * @return YYYY-MM-DD string
-     */
-    public String getYYYYMMDD() {
-        return year + "-" + month + "-" + day;
-    }
 
     private static void validateDate(final int year, final int month, final int day) {
         validateYear(year);
@@ -245,4 +238,25 @@ public class Date {
         return day;
     }
 
+    /**
+     * Returns string representation of date in YYYY-MM-DD format.
+     * @return YYYY-MM-DD string
+     */
+    public String getYYYYMMDD() {
+        return year + "-" + month + "-" + day;
+    }
+
+    /**
+     * Returns string representation of date in Month DD, YYYY format.
+     * @return Month DD, YYYY string
+     */
+    @Override
+    public String toString() {
+        String month = this.getMonthString();
+
+        /** Capitalize first letter*/
+        String formattedMonth = month.substring(0, 1).toUpperCase() + month.substring(1);
+
+        return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
+    }
 }
