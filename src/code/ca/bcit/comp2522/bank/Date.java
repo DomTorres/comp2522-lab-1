@@ -6,7 +6,7 @@ package ca.bcit.comp2522.bank;
  * @version 1.0
  */
 public class Date {
-    private static final int FIRST_YEAR = 1;
+    private static final int FIRST_YEAR = 1800;
     private static final int CURRENT_YEAR = 2024;
 
     private static final int FIRST_MONTH = 1;
