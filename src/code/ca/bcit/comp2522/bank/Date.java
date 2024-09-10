@@ -187,7 +187,7 @@ public class Date {
             case WEDNESDAY: return "wednesday";
             case THURSDAY: return "thursday";
             case FRIDAY: return "friday";
-            default: throw new IllegalArgumentException("Invalid day: " + day);
+            default: return "invalid day";
         }
     }
 
@@ -205,7 +205,7 @@ public class Date {
             case OCTOBER: return "october";
             case NOVEMBER: return "november";
             case DECEMBER: return "december";
-            default: throw new IllegalArgumentException("Invalid month: " + month);
+            default: return "invalid month";
         }
     }
 

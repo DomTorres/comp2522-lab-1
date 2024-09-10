@@ -9,17 +9,15 @@ package ca.bcit.comp2522.bank;
  */
 public class Person {
 
-    public static final Date DEFAULT_DEATHDATE = null; // Person is still alive
-
     private final Name name;
     private final Date birthDate;
     private final Date deathDate;
 
     /**
-     * The Person Constructor that initializes the object (dead person).
-     * @param name is a Name
-     * @param birthDate is the date of birth
-     * @param deathDate is the date of death
+     * The Person Constructor that initializes the object using their Name, birthdate and death date.
+     * @param name is the person's name.
+     * @param birthDate is the date of birth.
+     * @param deathDate is the date of death.
      */
     public Person (final Name name, final Date birthDate, final Date deathDate)
     {
@@ -29,45 +27,53 @@ public class Person {
     }
 
     /**
-     * The Person Constructor that initializes the object (alive person).
-     * @param name is a Name
-     * @param birthDate is the date of birth
+     * The Person Constuctor that initializes the object.
+     * This constructor is used when the death date is not provided and
+     * assumes that the Person is still alive.
+     * @param name is the person's name.
+     * @param birthDate is the date of birth.
      */
     public Person(final Name name, final Date birthDate)
     {
-        this(name, birthDate, null);
+        this(name, birthDate, Date.DEFAULT_DATE);
     }
 
+    /**
+     * Returns the Name of the Person
+     * @return the Name of the Person
+     */
     public Name getName() {
         return name;
     }
 
-    public boolean isDead() {
-        return getDeathDate() != null;
+    /**
+     * Returns the state of life of the Person.
+     * @return true if Person does not have a death date.
+     */
+    public boolean isDeath() {
+        return deathDate != null;
     }
 
+    /**
+     * Returns a String containing the details of the Person.
+     * @return a String representing the details of the Person.
+     */
     public String getDetails()
     {
-        StringBuilder details = new StringBuilder();
+        final String details;
 
-        details.append(name.getFullName() + " ");
-
-        if (this.deathDate == null) {
-            details.append("(alive) ");
+        if (this.deathDate == null)
+        {
+            details = String.format("%s (alive) was born on %s, %s!",
+                    name.getFullName(),
+                    birthDate.getDayOfTheWeek(), birthDate.toString());
         } else {
-            details.append("(died " + this.deathDate.getDayOfTheWeek() + ", " + this.deathDate + ") ");
+            details = String.format("%s (died %s, %s) was born on %s, %s!",
+                    name.getFullName(),
+                    deathDate.getDayOfTheWeek(), deathDate.toString(),
+                    birthDate.getDayOfTheWeek(), birthDate.toString());
         }
 
-        details.append("was born on " + this.birthDate.getDayOfTheWeek() + ", " + this.birthDate + "!");
-
-        return details.toString();
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public Date getDeathDate() {
-        return deathDate;
+        return details;
     }
 }
