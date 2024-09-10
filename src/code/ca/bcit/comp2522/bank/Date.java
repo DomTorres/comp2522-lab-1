@@ -38,6 +38,8 @@ public class Date {
 
     public static final Date DEFAULT_DATE = null;
 
+    private static final String MONTH_CODES = "144025036146";
+
     private final int year;
     private final int month;
     private final int day;
@@ -62,12 +64,16 @@ public class Date {
      */
     public String getDayOfTheWeek() {
         /** Get last two digits of year */
-        final int oneHundred = 100;
+        final int oneHundred;
+        oneHundred = 100;
+
         int lastTwoDigitsOfYear;
         lastTwoDigitsOfYear = year % oneHundred;
 
         /** 1. Calculate number of twelves */
-        final int twelve = 12;
+        final int twelve;
+        twelve = 12;
+
         int step1;
         step1 = lastTwoDigitsOfYear / twelve;
 
@@ -76,7 +82,9 @@ public class Date {
         step2 = lastTwoDigitsOfYear - (step1 * twelve);
 
         /** 3. Calculate number of fours from step 2 */
-        final int four = 4;
+        final int four;
+        four = 4;
+
         int step3;
         step3 = step2 / four;
 
@@ -92,23 +100,31 @@ public class Date {
         int number = step1 + step2 + step3 + step4 + step5;
 
         /** for January/February dates in leap years, add 6 at the start */
-        final int six = 6;
-        final int january = 1;
-        final int february = 2;
-        if ((month == january || month == february) && isLeapYear(year)) {
+        final int six;
+        six = 6;
+
+        if ((month == JANUARY || month == FEBRUARY) && isLeapYear(year)) {
             number += six;
         }
 
         /** for all dates in the 2000s, add 6 at the start */
-        final int year2000 = 2000;
+        final int year2000;
+        year2000 = 2000;
+
         if (year >= year2000) {
             number += six;
         }
 
         /** for all dates in the 1800s, add 2 at the start */
-        final int two = 2;
-        final int year1800 = 1800;
-        final int year1900 = 1900;
+        final int two;
+        two = 2;
+
+        final int year1800;
+        year1800 = 1800;
+
+        final int year1900;
+        year1900 = 1900;
+
         if (year1800 <= year && year < year1900) {
             number += two;
         }
@@ -116,7 +132,6 @@ public class Date {
         final int daysInWeek = 7;
         return dayOfTheWeekToString(number % daysInWeek);
     }
-
 
     private static void validateDate(final int year, final int month, final int day) {
         validateYear(year);
@@ -145,21 +160,28 @@ public class Date {
     }
 
     private static int daysInMonth(final int month, final boolean isLeapYear) {
-        final int thirtyOne = 31;
-        final int thirty = 30;
-        final int twentyEight = 28;
-        final int twentyNine = 29;
+        final int thirtyOneDays;
+        thirtyOneDays = 31;
+
+        final int thirtyDays;
+        thirtyDays = 30;
+
+        final int twentyEightDays;
+        twentyEightDays = 28;
+
+        final int twentyNineDays;
+        twentyNineDays = 29;
 
         switch (monthToString(month)) {
             case "january", "march", "may", "july", "august", "october", "december":
-                return thirtyOne;
+                return thirtyOneDays;
             case "april", "june", "september", "november":
-                return thirty;
+                return thirtyDays;
             case "february":
                 if (isLeapYear) {
-                    return twentyNine;
+                    return twentyNineDays;
                 } else {
-                    return twentyEight;
+                    return twentyEightDays;
                 }
             default:
                 return 0;
@@ -167,16 +189,21 @@ public class Date {
     }
 
     private static boolean isLeapYear(final int year) {
-        final int fourHundred = 400;
-        final int oneHundred = 100;
-        final int four = 4;
+        final int fourHundredYears;
+        fourHundredYears = 400;
 
-        if (year % fourHundred == 0) {
+        final int oneHundredYears;
+        oneHundredYears = 100;
+
+        final int fourYears;
+        fourYears = 4;
+
+        if (year % fourHundredYears == 0) {
             return true;
-        } else if (year % oneHundred == 0) {
+        } else if (year % oneHundredYears == 0) {
             return false;
         } else {
-            return year % four == 0;
+            return year % fourYears == 0;
         }
     }
 
@@ -212,21 +239,8 @@ public class Date {
     }
 
     private static int monthCode(final int month) {
-        switch (month) {
-            case 1: return 1;
-            case 2: return 4;
-            case 3: return 4;
-            case 4: return 0;
-            case 5: return 2;
-            case 6: return 5;
-            case 7: return 0;
-            case 8: return 3;
-            case 9: return 6;
-            case 10: return 1;
-            case 11: return 4;
-            case 12: return 6;
-            default: return -1;
-        }
+        final int one = 1;
+        return Integer.valueOf(MONTH_CODES.substring(month - one, month));
     }
 
     /**
@@ -278,7 +292,13 @@ public class Date {
         String month = this.getMonthString();
 
         /** Capitalize first letter*/
-        String formattedMonth = month.substring(0, 1).toUpperCase() + month.substring(1);
+        final int zero;
+        zero = 0;
+
+        final int one;
+        one = 1;
+
+        String formattedMonth = month.substring(zero, one).toUpperCase() + month.substring(1);
 
         return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
     }
