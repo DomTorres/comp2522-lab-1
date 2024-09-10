@@ -6,6 +6,27 @@ package ca.bcit.comp2522.bank;
  * @version 1.0
  */
 public class Date {
+    private static final int JANUARY = 1;
+    private static final int FEBRUARY = 2;
+    private static final int MARCH = 3;
+    private static final int APRIL = 4;
+    private static final int MAY = 5;
+    private static final int JUNE = 6;
+    private static final int JULY = 7;
+    private static final int AUGUST = 8;
+    private static final int SEPTEMBER = 9;
+    private static final int OCTOBER = 10;
+    private static final int NOVEMBER = 11;
+    private static final int DECEMBER = 12;
+
+    private static final int SATURDAY = 0;
+    private static final int SUNDAY = 1;
+    private static final int MONDAY = 2;
+    private static final int TUESDAY = 3;
+    private static final int WEDNESDAY = 4;
+    private static final int THURSDAY = 5;
+    private static final int FRIDAY = 6;
+
     private static final int FIRST_YEAR = 1800;
     private static final int CURRENT_YEAR = 2024;
 
@@ -159,32 +180,32 @@ public class Date {
 
     private static String dayOfTheWeekToString(final int day) {
         switch (day) {
-            case 0: return "saturday";
-            case 1: return "sunday";
-            case 2: return "monday";
-            case 3: return "tuesday";
-            case 4: return "wednesday";
-            case 5: return "thursday";
-            case 6: return "friday";
-            default: return "";
+            case SATURDAY: return "saturday";
+            case SUNDAY: return "sunday";
+            case MONDAY: return "monday";
+            case TUESDAY: return "tuesday";
+            case WEDNESDAY: return "wednesday";
+            case THURSDAY: return "thursday";
+            case FRIDAY: return "friday";
+            default: throw new IllegalArgumentException("Invalid day: " + day);
         }
     }
 
     private static String monthToString(final int month) {
         switch (month) {
-            case 1: return "january";
-            case 2: return "february";
-            case 3: return "march";
-            case 4: return "april";
-            case 5: return "may";
-            case 6: return "june";
-            case 7: return "july";
-            case 8: return "august";
-            case 9: return "september";
-            case 10: return "october";
-            case 11: return "november";
-            case 12: return "december";
-            default: return "";
+            case JANUARY: return "january";
+            case FEBRUARY: return "february";
+            case MARCH: return "march";
+            case APRIL: return "april";
+            case MAY: return "may";
+            case JUNE: return "june";
+            case JULY: return "july";
+            case AUGUST: return "august";
+            case SEPTEMBER: return "september";
+            case OCTOBER: return "october";
+            case NOVEMBER: return "november";
+            case DECEMBER: return "december";
+            default: throw new IllegalArgumentException("Invalid month: " + month);
         }
     }
 
