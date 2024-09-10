@@ -133,24 +133,45 @@ public class Date {
         return dayOfTheWeekToString(number % daysInWeek);
     }
 
+    /**
+     * This function validates the date by calling respective validator methods
+     * @param year
+     * @param month
+     * @param day
+     */
     private static void validateDate(final int year, final int month, final int day) {
         validateYear(year);
         validateMonth(month);
         validateDay(year, month, day);
     }
 
+    /**
+     * This function validates the year by checking if FIRST_YEAR <= year <= CURRENT_YEAR.
+     * @param year year
+     * @throws IllegalArgumentException if year invalid
+     */
     private static void validateYear(final int year) {
         if (!(FIRST_YEAR <= year && year <= CURRENT_YEAR)) {
             throw new IllegalArgumentException("Invalid year: " + year);
         }
     }
 
+    /**
+     * This function validates the year by checking if FIRST_MONTH <= year <= CURRENT_MONTH.
+     * @param month month
+     * @throws IllegalArgumentException if month invalid
+     */
     private static void validateMonth(final int month) {
         if (!(FIRST_MONTH <= month && month <= LAST_MONTH)) {
             throw new IllegalArgumentException("Invalid month: " + month);
         }
     }
 
+    /**
+     * This function validates the day by getting the LAST_DAY for specific month, then checking if FIRST_DAY <= day <= LAST_DAY.
+     * @param day day
+     * @throws IllegalArgumentException if day invalid
+     */
     private static void validateDay(final int year, final int month, final int day) {
         LAST_DAY = daysInMonth(month, isLeapYear(year));
 
@@ -159,6 +180,12 @@ public class Date {
         }
     }
 
+    /**
+     * This function returns the number of days in a month.
+     * @param month month
+     * @param isLeapYear if leap year
+     * @return number of days in month
+     */
     private static int daysInMonth(final int month, final boolean isLeapYear) {
         final int thirtyOneDays;
         thirtyOneDays = 31;
@@ -188,6 +215,11 @@ public class Date {
         }
     }
 
+    /**
+     * This function determines if a year is a leap year.
+     * @param year year
+     * @return if leap year
+     */
     private static boolean isLeapYear(final int year) {
         final int fourHundredYears;
         fourHundredYears = 400;
@@ -207,6 +239,11 @@ public class Date {
         }
     }
 
+    /**
+     * This function converts the day number to a String.
+     * @param day day
+     * @return day (String)
+     */
     private static String dayOfTheWeekToString(final int day) {
         switch (day) {
             case SATURDAY: return "saturday";
@@ -220,6 +257,11 @@ public class Date {
         }
     }
 
+    /**
+     * This function converts the months number to a String.
+     * @param month month
+     * @return month (month)
+     */
     private static String monthToString(final int month) {
         switch (month) {
             case JANUARY: return "january";
@@ -238,8 +280,15 @@ public class Date {
         }
     }
 
+    /**
+     * This function returns the month code for a month.
+     * @param month month
+     * @return month code
+     */
     private static int monthCode(final int month) {
-        final int one = 1;
+        final int one;
+        one = 1;
+
         return Integer.valueOf(MONTH_CODES.substring(month - one, month));
     }
 
