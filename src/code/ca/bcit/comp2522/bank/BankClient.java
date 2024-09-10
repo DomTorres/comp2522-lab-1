@@ -18,7 +18,7 @@ public class BankClient extends Person {
      * @param signupDate    The date the client signed up.
      * @param clientID      The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name name, final Date birthDate, final Date deathDate,
+    public BankClient(final Name name,final Date birthDate, final Date deathDate,
                       final Date signupDate, final String clientID)
     {
         super (name, birthDate, deathDate);
@@ -40,7 +40,7 @@ public class BankClient extends Person {
      */
     public BankClient(final Name name, final Date birthDate, final Date signupDate, final String clientID)
     {
-        super (name, birthDate, Person.DEFAULT_DEATHDATE);
+        super (name, birthDate, Date.DEFAULT_DATE);
 
         validateClientID(clientID);
 
@@ -57,17 +57,8 @@ public class BankClient extends Person {
         }
     }
 
-    public Date getSignupDate() {
-        return signupDate;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
     /**
      * Returns a String containing the details of the bank client.
-     *
      * @return a String representing the details of the bank client.
      */
     @Override
@@ -76,11 +67,11 @@ public class BankClient extends Person {
         final String details;
         final String stateOfLife;
 
-        if (super.isDead())
+        if (super.isDeath())
         {
-            stateOfLife = "dead";
-        } else {
             stateOfLife = "alive";
+        } else {
+            stateOfLife = "dead";
         }
 
         details = String.format("%s client #%s (%s) joined the bank on %s, %s",

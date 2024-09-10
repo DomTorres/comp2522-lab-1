@@ -9,6 +9,10 @@ package ca.bcit.comp2522.bank;
  * @version 1.0
  */
 public class Name {
+
+    public final int ZERO = 0;
+    public final int ONE = 1;
+
     private final String firstName;
     private final String lastName;
 
@@ -70,7 +74,7 @@ public class Name {
      */
     public String getInitials()
     {
-        return firstName.substring(0, 1).toUpperCase() + "." + lastName.substring(0, 1).toUpperCase() + ".";
+        return firstName.substring(ZERO, ONE).toUpperCase() + "." + lastName.substring(ZERO, ONE).toUpperCase() + ".";
     }
 
     /**
@@ -79,8 +83,8 @@ public class Name {
      */
     public String getFullName()
     {
-        return firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase() + " "
-                + lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
+        return firstName.substring(ZERO, ONE).toUpperCase() + firstName.substring(ONE).toLowerCase() + " "
+                + lastName.substring(ZERO, ONE).toUpperCase() + lastName.substring(ONE).toLowerCase();
     }
 
     /**
@@ -92,12 +96,12 @@ public class Name {
         StringBuilder reverseFirst = new StringBuilder();
         StringBuilder reverseLast = new StringBuilder();
 
-        for (int i = firstName.length() - 1; i >= 0; i--)
+        for (int i = firstName.length() - ONE; i >= ZERO; i--)
         {
             reverseFirst.append(firstName.charAt(i));
         }
 
-        for (int i = lastName.length() - 1; i >= 0; i--)
+        for (int i = lastName.length() - ONE; i >= ZERO; i--)
         {
             reverseLast.append(lastName.charAt(i));
         }
@@ -105,4 +109,3 @@ public class Name {
         return reverseLast + " " + reverseFirst;
     }
 }
-
