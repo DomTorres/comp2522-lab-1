@@ -36,6 +36,8 @@ public class Date {
     private static final int FIRST_DAY = 1;
     private static int LAST_DAY;
 
+    public static final Date DEFAULT_DATE = null;
+
     private final int year;
     private final int month;
     private final int day;

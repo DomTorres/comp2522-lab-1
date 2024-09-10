@@ -76,4 +76,12 @@ public class Person {
 
         return details;
     }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getDeathDate() {
+        return deathDate;
+    }
 }

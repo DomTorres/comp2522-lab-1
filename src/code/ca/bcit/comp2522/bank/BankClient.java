@@ -80,4 +80,12 @@ public class BankClient extends Person {
 
         return details;
     }
+
+    public Date getSignupDate() {
+        return signupDate;
+    }
+
+    public String getClientID() {
+        return clientID;
+    }
 }
