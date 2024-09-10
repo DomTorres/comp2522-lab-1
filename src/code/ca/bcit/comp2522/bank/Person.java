@@ -43,20 +43,18 @@ public class Person {
 
     public String getDetails()
     {
-        final String details;
+        StringBuilder details = new StringBuilder();
 
-        if (this.deathDate == null)
-        {
-            details = String.format("%s (alive) was born on %s, %s %s, %s!",
-                    name.getFullName(),
-                    birthDate.getDayOfTheWeek(), birthDate.getMonth(), birthDate.getDay(), birthDate.getYear());
+        details.append(name.getFullName() + " ");
+
+        if (this.deathDate == null) {
+            details.append("(alive) ");
         } else {
-            details = String.format("%s (died %s, %s %s, %s) was born on %s, %s %s, %s!",
-                    name.getFullName(),
-                    deathDate.getDayOfTheWeek(), deathDate.getMonth(), deathDate.getDay(), deathDate.getYear(),
-                    birthDate.getDayOfTheWeek(), birthDate.getMonth(), birthDate.getDay(), birthDate.getYear());
+            details.append("(died " + this.deathDate.getDayOfTheWeek() + ", " + this.deathDate + ") ");
         }
 
-        return details;
+        details.append("was born on " + this.birthDate.getDayOfTheWeek() + ", " + this.birthDate + "!");
+
+        return details.toString();
     }
 }
