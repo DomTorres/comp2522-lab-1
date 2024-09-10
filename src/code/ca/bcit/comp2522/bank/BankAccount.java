@@ -26,7 +26,7 @@ public class BankAccount {
     public BankAccount(final BankClient client, final double balanceUSD, final int pin,
                        final String accountNumber, final Date dateOpened)
     {
-        this(client, balanceUSD, pin, accountNumber, dateOpened, Date.DEFAULT_DATE);
+        this(client, balanceUSD, pin, accountNumber, dateOpened, null);
     }
 
     private void validateAccountNumber(String accountNumber)

@@ -26,7 +26,11 @@ public class Main {
         System.out.println(ba1.getDetails());
 
         // Nelson Mandela
-        Person nelsonMandela = new Person(new Name("Nelson", "Mandela"), new Date(1918, 7, 18), new Date(2013, 12, 5));
+        Person nelsonMandela = new Person(
+                new Name("Nelson", "Mandela"),
+                new Date(1918, 7, 18),
+                new Date(2013, 12, 5)
+        );
 
         System.out.println(nelsonMandela.getName().getInitials());
         System.out.println(nelsonMandela.getName().getFullName());
@@ -35,7 +39,26 @@ public class Main {
 
         BankClient nelsonMandelaBankClient = new BankClient(
                 nelsonMandela.getName(),
-                nelsonMandela.get
-        )
+                nelsonMandela.getBirthDate(),
+                nelsonMandela.getDeathDate(),
+                new Date(1994, 5, 10),
+                "654321"
+        );
+
+        System.out.println(nelsonMandelaBankClient.getDetails());
+
+        BankAccount nelsonMandelaBankAccount = new BankAccount(
+                nelsonMandelaBankClient,
+                2000,
+                4664,
+                nelsonMandelaBankClient.getClientID(),
+                nelsonMandelaBankClient.getSignupDate()
+        );
+
+        nelsonMandelaBankAccount.withdraw(200, 4664);
+
+        // Frida Kahlo
+
+        // Jackie Chan
     }
 }

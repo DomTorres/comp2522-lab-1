@@ -16,7 +16,7 @@ public class Person {
     private final Date deathDate;
 
     /**
-     * The Person Constructor that initializes the object.
+     * The Person Constructor that initializes the object (dead person).
      * @param name is a Name
      * @param birthDate is the date of birth
      * @param deathDate is the date of death
@@ -28,17 +28,22 @@ public class Person {
         this.deathDate = deathDate;
     }
 
+    /**
+     * The Person Constructor that initializes the object (alive person).
+     * @param name is a Name
+     * @param birthDate is the date of birth
+     */
     public Person(final Name name, final Date birthDate)
     {
-        this(name, birthDate, Date.DEFAULT_DATE);
+        this(name, birthDate, null);
     }
 
     public Name getName() {
         return name;
     }
 
-    public boolean isDeath() {
-        return deathDate != null;
+    public boolean isDead() {
+        return getDeathDate() != null;
     }
 
     public String getDetails()
