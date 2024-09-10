@@ -2,6 +2,7 @@ package ca.bcit.comp2522.bank;
 
 public class Main {
     public static void main(String[] args) {
+        // Albert Einstein
         Name n = new Name("Albert", "Einstein");
 
         System.out.println(n.getInitials());
@@ -23,5 +24,18 @@ public class Main {
         System.out.println(ba1.getDetails());
         ba1.withdraw(100, 3141);
         System.out.println(ba1.getDetails());
+
+        // Nelson Mandela
+        Person nelsonMandela = new Person(new Name("Nelson", "Mandela"), new Date(1918, 7, 18), new Date(2013, 12, 5));
+
+        System.out.println(nelsonMandela.getName().getInitials());
+        System.out.println(nelsonMandela.getName().getFullName());
+        System.out.println(nelsonMandela.getName().getReverseName());
+        System.out.println(nelsonMandela.getDetails());
+
+        BankClient nelsonMandelaBankClient = new BankClient(
+                nelsonMandela.getName(),
+                nelsonMandela.get
+        )
     }
 }

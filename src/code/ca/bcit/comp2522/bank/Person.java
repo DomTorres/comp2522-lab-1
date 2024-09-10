@@ -57,4 +57,12 @@ public class Person {
 
         return details.toString();
     }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getDeathDate() {
+        return deathDate;
+    }
 }
