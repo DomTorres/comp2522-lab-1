@@ -28,8 +28,12 @@ public class BankAccount {
      * @param dateOpened    is the date when the bank account was opened.
      * @param dateClosed    is the date when the bank account was closed.
      */
-    public BankAccount(final BankClient client, final double balanceUSD, final int pin,
-                       final String accountNumber, final Date dateOpened, final Date dateClosed)
+    public BankAccount(final BankClient client,
+                       final double balanceUSD,
+                       final int pin,
+                       final String accountNumber,
+                       final Date dateOpened,
+                       final Date dateClosed)
     {
         validateAccountNumber(accountNumber);
 
@@ -39,7 +43,6 @@ public class BankAccount {
         this.accountNumber = accountNumber;
         this.dateOpened = dateOpened;
         this.dateClosed = dateClosed;
-
     }
 
     /**
@@ -53,10 +56,13 @@ public class BankAccount {
      * @param accountNumber is the account number of the bank account.
      * @param dateOpened    is the date when the bank account was opened.
      */
-    public BankAccount(final BankClient client, final double balanceUSD, final int pin,
-                       final String accountNumber, final Date dateOpened)
+    public BankAccount(final BankClient client,
+                       final double balanceUSD,
+                       final int pin,
+                       final String accountNumber,
+                       final Date dateOpened)
     {
-        this(client, balanceUSD, pin, accountNumber, dateOpened, Date.DEFAULT_DATE);
+        this(client, balanceUSD, pin, accountNumber, dateOpened, null);
     }
 
     private void validateAccountNumber(String accountNumber)

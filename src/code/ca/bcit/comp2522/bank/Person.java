@@ -19,7 +19,7 @@ public class Person {
      * @param birthDate is the date of birth.
      * @param deathDate is the date of death.
      */
-    public Person (final Name name, final Date birthDate, final Date deathDate)
+    public Person(final Name name, final Date birthDate, final Date deathDate)
     {
         this.name = name;
         this.birthDate = birthDate;
@@ -35,7 +35,7 @@ public class Person {
      */
     public Person(final Name name, final Date birthDate)
     {
-        this(name, birthDate, Date.DEFAULT_DATE);
+        this(name, birthDate, null);
     }
 
     /**

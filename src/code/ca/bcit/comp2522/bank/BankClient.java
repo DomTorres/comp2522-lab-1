@@ -18,8 +18,11 @@ public class BankClient extends Person {
      * @param signupDate    The date the client signed up.
      * @param clientID      The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name name,final Date birthDate, final Date deathDate,
-                      final Date signupDate, final String clientID)
+    public BankClient(final Name name,
+                      final Date birthDate,
+                      final Date deathDate,
+                      final Date signupDate,
+                      final String clientID)
     {
         super(name, birthDate, deathDate);
 
@@ -38,9 +41,12 @@ public class BankClient extends Person {
      * @param signupDate    The date the client signed up.
      * @param clientID      The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name name, final Date birthDate, final Date signupDate, final String clientID)
+    public BankClient(final Name name,
+                      final Date birthDate,
+                      final Date signupDate,
+                      final String clientID)
     {
-        super (name, birthDate, Date.DEFAULT_DATE);
+        super(name, birthDate, null);
 
         validateClientID(clientID);
 

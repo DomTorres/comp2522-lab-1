@@ -36,8 +36,6 @@ public class Date {
     private static final int FIRST_DAY = 1;
     private static int LAST_DAY;
 
-    public static final Date DEFAULT_DATE = null;
-
     private static final String MONTH_CODES = "144025036146";
 
     private final int year;
