@@ -21,7 +21,7 @@ public class BankClient extends Person {
     public BankClient(final Name name,final Date birthDate, final Date deathDate,
                       final Date signupDate, final String clientID)
     {
-        super (name, birthDate, deathDate);
+        super(name, birthDate, deathDate);
 
         validateClientID(clientID);
 
@@ -67,7 +67,7 @@ public class BankClient extends Person {
         final String details;
         final String stateOfLife;
 
-        if (super.isDeath())
+        if (!super.isAlive())
         {
             stateOfLife = "alive";
         } else {

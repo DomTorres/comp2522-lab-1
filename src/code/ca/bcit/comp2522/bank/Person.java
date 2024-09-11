@@ -47,11 +47,11 @@ public class Person {
     }
 
     /**
-     * Returns the state of life of the Person.
-     * @return true if Person does not have a death date.
+     * Returns if person is alive.
+     * @return true if Person is alive
      */
-    public boolean isDeath() {
-        return deathDate != null;
+    public boolean isAlive() {
+        return deathDate == null;
     }
 
     /**

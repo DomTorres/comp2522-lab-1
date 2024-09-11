@@ -59,8 +59,6 @@ public class Main {
 
         // Frida Kahlo
 
-        Date myBirthday = new Date(2003, 4, 10);
-        System.out.println(myBirthday.getDayOfTheWeek());
         // Jackie Chan
     }
 }
