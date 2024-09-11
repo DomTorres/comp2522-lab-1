@@ -2,8 +2,8 @@ package ca.bcit.comp2522.bank;
 
 public class BankClient extends Person {
 
-    private static final int SIX = 6;
-    private static final int SEVEN = 7;
+    private static final int MIN_CLIENT_ID_LEN = 6;
+    private static final int MAX_CLIENT_ID_LEN = 7;
 
     private final Date signupDate;
     private final String clientID;
@@ -56,8 +56,8 @@ public class BankClient extends Person {
 
     private void validateClientID(final String clientID)
     {
-        if (clientID == null || clientID.isBlank() || clientID.length() < SIX
-                || clientID.length() > SEVEN)
+        if (clientID == null || clientID.isBlank() || clientID.length() < MIN_CLIENT_ID_LEN
+                || clientID.length() > MAX_CLIENT_ID_LEN)
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }
@@ -70,21 +70,20 @@ public class BankClient extends Person {
     @Override
     public String getDetails()
     {
-        final String details;
-        final String stateOfLife;
+        final StringBuilder details = new StringBuilder();
 
-        if (!super.isAlive())
+        details.append(String.format("%s client #%s ", getName().getFullName(), clientID));
+
+        if (isAlive())
         {
-            stateOfLife = "alive";
+            details.append("(alive) ");
         } else {
-            stateOfLife = "dead";
+            details.append("(not alive) ");
         }
 
-        details = String.format("%s client #%s (%s) joined the bank on %s, %s",
-        super.getName().getFullName(), clientID, stateOfLife,
-                signupDate.getDayOfTheWeek(), signupDate.toString());
+        details.append(String.format(" joined the bank on %s", signupDate.getDayAndDateString()));
 
-        return details;
+        return details.toString();
     }
 
     public Date getSignupDate() {
