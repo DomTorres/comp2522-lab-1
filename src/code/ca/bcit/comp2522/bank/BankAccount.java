@@ -11,6 +11,9 @@ package ca.bcit.comp2522.bank;
  */
 public class BankAccount {
 
+    private static final int MIN_ACCOUNT_NUMBER_LEN = 6;
+    private static final int MAX_ACCOUNT_NUMBER_LEN = 7;
+
     private final BankClient client;
     private double balanceUSD;
     private final int pin;
@@ -67,10 +70,12 @@ public class BankAccount {
 
     private void validateAccountNumber(String accountNumber)
     {
-        if (accountNumber == null || accountNumber.isBlank() || accountNumber.length() < 6
-                || accountNumber.length() > 7)
+        if (accountNumber == null ||
+            accountNumber.isBlank() ||
+            accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN ||
+            accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN)
         {
-            throw (new IllegalArgumentException("Invalid Client ID:" + accountNumber));
+            throw new IllegalArgumentException("Invalid Client ID:" + accountNumber);
         }
     }
 

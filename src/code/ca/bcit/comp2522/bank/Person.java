@@ -60,21 +60,19 @@ public class Person {
      */
     public String getDetails()
     {
-        final String details;
+        final StringBuilder details = new StringBuilder();
 
-        if (this.deathDate == null)
-        {
-            details = String.format("%s (alive) was born on %s, %s!",
-                    name.getFullName(),
-                    birthDate.getDayOfTheWeek(), birthDate.toString());
+        details.append(name.getFullName());
+
+        if (isAlive()) {
+            details.append(" (alive)");
         } else {
-            details = String.format("%s (died %s, %s) was born on %s, %s!",
-                    name.getFullName(),
-                    deathDate.getDayOfTheWeek(), deathDate.toString(),
-                    birthDate.getDayOfTheWeek(), birthDate.toString());
+            details.append(String.format(" (died %s)", deathDate.getDayAndDateString()));
         }
 
-        return details;
+        details.append(String.format(" was born on %s!", birthDate.getDayAndDateString()));
+
+        return details.toString();
     }
 
     public Date getBirthDate() {

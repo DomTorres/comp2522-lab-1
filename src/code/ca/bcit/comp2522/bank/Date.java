@@ -349,4 +349,12 @@ public class Date {
 
         return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
     }
+
+    /**
+     * Returns string representation of date in day, Month DD, YYYY format.
+     * @return day, Month DD, YYYY string
+     */
+    public String getDayAndDateString() {
+        return String.format("%s, %s", this.getDayOfTheWeek(), this.toString());
+    }
 }
