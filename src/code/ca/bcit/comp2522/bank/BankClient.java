@@ -54,6 +54,9 @@ public class BankClient extends Person {
         this.clientID = clientID;
     }
 
+    /* Validates the ClientID.
+     * Cannot be blank or null.
+     * Must be within the minimum and maximum Client ID length */
     private void validateClientID(final String clientID)
     {
         if (clientID == null || clientID.isBlank() || clientID.length() < MIN_CLIENT_ID_LEN
@@ -86,10 +89,18 @@ public class BankClient extends Person {
         return details.toString();
     }
 
+    /**
+     * Returns the signupDate
+     * @return the signupDate
+     */
     public Date getSignupDate() {
         return signupDate;
     }
 
+    /**
+     * Returns the clientID
+     * @return the clientID
+     */
     public String getClientID() {
         return clientID;
     }

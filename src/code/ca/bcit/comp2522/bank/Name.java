@@ -33,6 +33,9 @@ public class Name {
         this.lastName = lastName;
     }
 
+    /* Validates the First Name.
+    * Cannot be null, blank, or "admin"
+    * Must be less than the maximum name length.*/
     private static void validateFirstName(final String firstName)
     {
         if (firstName == null || firstName.isBlank() || firstName.length() >= MAX_NAME_LENGTH || firstName.toLowerCase().contains("admin"))
@@ -41,6 +44,9 @@ public class Name {
         }
     }
 
+    /* Validates the Last Name.
+     * Cannot be null, blank, or "admin"
+     * Must be less than the maximum name length.*/
     private static void validateLastName(final String lastName)
     {
         if (lastName == null || lastName.isBlank() || lastName.length() >= MAX_NAME_LENGTH || lastName.toLowerCase().contains("admin"))
@@ -88,8 +94,8 @@ public class Name {
     }
 
     /**
-     * Returns the full name in reverse order
-     * @return the full name in reverse order
+     * Returns the full name in reverse order.
+     * @return the full name in reverse order.
      */
     public String getReverseName()
     {

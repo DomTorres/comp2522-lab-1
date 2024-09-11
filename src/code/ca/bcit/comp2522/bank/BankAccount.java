@@ -68,12 +68,15 @@ public class BankAccount {
         this(client, balanceUSD, pin, accountNumber, dateOpened, null);
     }
 
+    /* Validates the Account Number.
+    * Cannot be blank or null.
+    * Must be within the minimum and maximum account number length */
     private void validateAccountNumber(String accountNumber)
     {
         if (accountNumber == null ||
-            accountNumber.isBlank() ||
-            accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN ||
-            accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN)
+                accountNumber.isBlank() ||
+                accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN ||
+                accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN)
         {
             throw new IllegalArgumentException("Invalid Client ID:" + accountNumber);
         }
