@@ -88,10 +88,10 @@ public class BankAccount {
     public void withdraw(final double amountUSD, final int pinToMatch)
     {
         if (pin != pinToMatch) {
-            throw (new IllegalArgumentException("Invalid pin: " + pinToMatch));
+            throw new IllegalArgumentException("Invalid pin: " + pinToMatch);
         } else if (balanceUSD < amountUSD) {
-            throw (new IllegalArgumentException("Withdraw amount of " + amountUSD
-                    + " exceeds Account Balance of " + balanceUSD));
+            throw new IllegalArgumentException("Withdraw amount of " + amountUSD
+                    + " exceeds Account Balance of " + balanceUSD);
         } else {
             balanceUSD = balanceUSD - amountUSD;
         }
@@ -103,7 +103,7 @@ public class BankAccount {
      */
     public void withdraw(final double amountUSD)
     {
-
+        throw new IllegalArgumentException("No pin inputted.");
     }
 
     /**

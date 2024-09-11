@@ -26,11 +26,14 @@ public class Main {
         System.out.println(ba1.getDetails());
 
         // Nelson Mandela
-        Person nelsonMandela = new Person(
+        final Person nelsonMandela = new Person(
                 new Name("Nelson", "Mandela"),
                 new Date(1918, 7, 18),
                 new Date(2013, 12, 5)
         );
+
+        final String nelsonMandelaAccountNumber = "654321";
+        final Date nelsonMandelaSignUpDate = new Date(1994, 5, 10);
 
         System.out.println(nelsonMandela.getName().getInitials());
         System.out.println(nelsonMandela.getName().getFullName());
@@ -41,8 +44,8 @@ public class Main {
                 nelsonMandela.getName(),
                 nelsonMandela.getBirthDate(),
                 nelsonMandela.getDeathDate(),
-                new Date(1994, 5, 10),
-                "654321"
+                nelsonMandelaSignUpDate,
+                nelsonMandelaAccountNumber
         );
 
         System.out.println(nelsonMandelaBankClient.getDetails());
@@ -51,14 +54,90 @@ public class Main {
                 nelsonMandelaBankClient,
                 2000,
                 4664,
-                nelsonMandelaBankClient.getClientID(),
-                nelsonMandelaBankClient.getSignupDate()
+                nelsonMandelaAccountNumber,
+                nelsonMandelaSignUpDate
         );
+
+        System.out.println(nelsonMandelaBankAccount.getDetails());
 
         nelsonMandelaBankAccount.withdraw(200, 4664);
 
+        System.out.println(nelsonMandelaBankAccount.getDetails());
+
         // Frida Kahlo
+        final Person fridaKahlo = new Person(
+                new Name("Frida", "Kahlo"),
+                new Date(1918, 7, 18),
+                new Date(2013, 12, 5));
+
+        final String fridaKahloAccountNumber = "frd123";
+        final Date fridaKahloSignUpDate = new Date(1940, 1, 1);
+
+        System.out.println(fridaKahlo.getName().getInitials());
+        System.out.println(fridaKahlo.getName().getFullName());
+        System.out.println(fridaKahlo.getName().getReverseName());
+        System.out.println(fridaKahlo.getDetails());
+
+        BankClient fridaKahloBankClient = new BankClient(
+                fridaKahlo.getName(),
+                fridaKahlo.getBirthDate(),
+                fridaKahlo.getDeathDate(),
+                fridaKahloSignUpDate,
+                fridaKahloAccountNumber
+        );
+
+        System.out.println(fridaKahloBankClient.getDetails());
+
+        BankAccount fridaKahloBankAccount = new BankAccount(
+                fridaKahloBankClient,
+                500,
+                1907,
+                fridaKahloAccountNumber,
+                fridaKahloSignUpDate,
+                new Date(1954, 7, 13)
+        );
+
+        System.out.println(fridaKahloBankAccount.getDetails());
+
+        fridaKahloBankAccount.withdraw(50, 1907);
+
+        System.out.println(fridaKahloBankAccount.getDetails());
 
         // Jackie Chan
+        final Person jackieChan = new Person(
+                new Name("Jackie", "Chan"),
+                new Date(1954, 4, 7)
+        );
+
+        final String jackieChanAccountNumber = "chan789";
+        final Date jackieChanSignUpDate = new Date(1980, 8, 1);
+
+        System.out.println(jackieChan.getName().getInitials());
+        System.out.println(jackieChan.getName().getFullName());
+        System.out.println(jackieChan.getName().getReverseName());
+        System.out.println(jackieChan.getDetails());
+
+        BankClient jackieChanBankClient = new BankClient(
+                jackieChan.getName(),
+                jackieChan.getBirthDate(),
+                jackieChanSignUpDate,
+                jackieChanAccountNumber
+        );
+
+        System.out.println(jackieChanBankClient.getDetails());
+
+        BankAccount jackieChanBankAccount = new BankAccount(
+                jackieChanBankClient,
+                3000,
+                1954,
+                jackieChanAccountNumber,
+                jackieChanSignUpDate
+        );
+
+        System.out.println(jackieChanBankAccount.getDetails());
+
+        jackieChanBankAccount.withdraw(500, 1954);
+
+        System.out.println(jackieChanBankAccount.getDetails());
     }
 }

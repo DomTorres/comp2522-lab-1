@@ -81,7 +81,7 @@ public class BankClient extends Person {
             details.append("(not alive) ");
         }
 
-        details.append(String.format(" joined the bank on %s", signupDate.getDayAndDateString()));
+        details.append(String.format("joined the bank on %s", signupDate.getDayAndDateString()));
 
         return details.toString();
     }
