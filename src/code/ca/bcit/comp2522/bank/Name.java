@@ -11,32 +11,38 @@ package ca.bcit.comp2522.bank;
 public class Name {
 
     public final int ZERO = 0;
-    public final int ONE = 1;
+    public final int ONE  = 1;
 
     private final String firstName;
     private final String lastName;
 
+    // Maximum length of Name
     private static final int MAX_NAME_LENGTH = 45;
 
     /**
      * This is the Name Constructor that validates and initializes
      * the firstName and lastName.
-     * @param firstName is a String
-     * @param lastName is a String
+     * @param firstName is the first name
+     * @param lastName  is the last name
      */
-    public Name(final String firstName, final String lastName)
+    public Name(final String firstName,
+                final String lastName)
     {
         validateFirstName(firstName);
         validateLastName(lastName);
 
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName  = firstName;
+        this.lastName   = lastName;
     }
 
-    /* Validates the First Name.
-    * Cannot be null, blank, or "admin"
-    * Must be less than the maximum name length.*/
+    /*
+     * Validates the First Name. It cannot be null, blank, or "admin".
+     * Must be less than the maximum name length
+     * @param firstName is the first name
+     * @throws IllegalArgumentException when it does not follow the name criteria.
+     */
     private static void validateFirstName(final String firstName)
+            throws IllegalArgumentException
     {
         if(firstName == null ||
                 firstName.isBlank() ||
@@ -47,12 +53,18 @@ public class Name {
         }
     }
 
-    /* Validates the Last Name.
-     * Cannot be null, blank, or "admin"
-     * Must be less than the maximum name length.*/
+    /*
+     * Validates the Last Name. Cannot be null, blank, or "admin".
+     * Must be less than the maximum name length.
+     * @param lastName is the last name
+     * @throws IllegalArgumentException when it does not follow the name criteria*/
     private static void validateLastName(final String lastName)
+            throws IllegalArgumentException
     {
-        if (lastName == null || lastName.isBlank() || lastName.length() >= MAX_NAME_LENGTH || lastName.toLowerCase().contains("admin"))
+        if(lastName == null ||
+                lastName.isBlank() ||
+                lastName.length() >= MAX_NAME_LENGTH ||
+                lastName.toLowerCase().contains("admin"))
         {
             throw new IllegalArgumentException("Invalid Last Name: " + lastName);
         }
@@ -83,7 +95,8 @@ public class Name {
      */
     public String getInitials()
     {
-        return firstName.substring(ZERO, ONE).toUpperCase() + "." + lastName.substring(ZERO, ONE).toUpperCase() + ".";
+        return firstName.substring(ZERO, ONE).toUpperCase() + "." +
+               lastName.substring(ZERO, ONE).toUpperCase() + ".";
     }
 
     /**
@@ -92,8 +105,8 @@ public class Name {
      */
     public String getFullName()
     {
-        return firstName.substring(ZERO, ONE).toUpperCase() + firstName.substring(ONE).toLowerCase() + " "
-                + lastName.substring(ZERO, ONE).toUpperCase() + lastName.substring(ONE).toLowerCase();
+        return firstName.substring(ZERO, ONE).toUpperCase() + firstName.substring(ONE).toLowerCase() + " " +
+               lastName.substring(ZERO, ONE).toUpperCase() + lastName.substring(ONE).toLowerCase();
     }
 
     /**
@@ -102,8 +115,8 @@ public class Name {
      */
     public String getReverseName()
     {
-        StringBuilder reverseFirst = new StringBuilder();
-        StringBuilder reverseLast = new StringBuilder();
+        StringBuilder reverseFirst  = new StringBuilder();
+        StringBuilder reverseLast   = new StringBuilder();
 
         for (int i = firstName.length() - ONE; i >= ZERO; i--)
         {
