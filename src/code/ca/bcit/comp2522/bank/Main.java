@@ -2,28 +2,43 @@ package ca.bcit.comp2522.bank;
 
 public class Main {
     public static void main(String[] args) {
+        final String default_clientID = "0000000";
+
         // Albert Einstein
-        Name n = new Name("Albert", "Einstein");
+        final Person albertEinstein = new Person(
+                new Name("Albert", "Einstein"),
+                new Date(1879, 3, 14),
+                new Date(1955, 4, 18)
+        );
 
-        System.out.println(n.getInitials());
-        System.out.println(n.getFullName());
-        System.out.println(n.getReverseName());
+        final Date albertEinsteinSignUpDate = new Date(1950, 10, 14);
 
-        Date aeBirthDate = new Date(1879, 3, 14);
-        Date aeDeathDate = new Date(1955, 4, 18);
-        Date aeBankOpenDate = new Date(1900, 1, 1);
-        Date aeBankCloseDate = new Date(1950, 10, 14);
+        System.out.println(albertEinstein.getName().getInitials());
+        System.out.println(albertEinstein.getName().getFullName());
+        System.out.println(albertEinstein.getName().getReverseName());
+        System.out.println(albertEinstein.getDetails());
 
-        Person ae = new Person(n, aeBirthDate, aeDeathDate);
-        System.out.println(ae.getDetails());
+        BankClient albertEinsteinBankClient = new BankClient(
+                albertEinstein.getName(),
+                albertEinstein.getBirthDate(),
+                albertEinstein.getDeathDate(),
+                albertEinsteinSignUpDate,
+                default_clientID
+        );
 
-        BankClient bc1 = new BankClient(n, aeBirthDate, aeDeathDate, aeBankOpenDate,"654321");
-        System.out.println(bc1.getDetails());
+        System.out.println(albertEinsteinBankClient.getDetails());
 
-        BankAccount ba1 = new BankAccount(bc1, 1000, 3141, "654321", aeBankOpenDate, aeBankCloseDate);
-        System.out.println(ba1.getDetails());
-        ba1.withdraw(100, 3141);
-        System.out.println(ba1.getDetails());
+        BankAccount albertEinsteinBankAccount = new BankAccount(
+                albertEinsteinBankClient,
+                1000,
+                3141,
+                "abc123",
+                albertEinsteinSignUpDate
+        );
+
+        System.out.println(albertEinsteinBankAccount.getDetails());
+        albertEinsteinBankAccount.withdraw(100, 3141);
+        System.out.println(albertEinsteinBankAccount.getDetails());
 
         // Nelson Mandela
         final Person nelsonMandela = new Person(
@@ -32,7 +47,6 @@ public class Main {
                 new Date(2013, 12, 5)
         );
 
-        final String nelsonMandelaAccountNumber = "654321";
         final Date nelsonMandelaSignUpDate = new Date(1994, 5, 10);
 
         System.out.println(nelsonMandela.getName().getInitials());
@@ -45,7 +59,7 @@ public class Main {
                 nelsonMandela.getBirthDate(),
                 nelsonMandela.getDeathDate(),
                 nelsonMandelaSignUpDate,
-                nelsonMandelaAccountNumber
+                default_clientID
         );
 
         System.out.println(nelsonMandelaBankClient.getDetails());
@@ -54,14 +68,12 @@ public class Main {
                 nelsonMandelaBankClient,
                 2000,
                 4664,
-                nelsonMandelaAccountNumber,
+                "654321",
                 nelsonMandelaSignUpDate
         );
 
         System.out.println(nelsonMandelaBankAccount.getDetails());
-
         nelsonMandelaBankAccount.withdraw(200, 4664);
-
         System.out.println(nelsonMandelaBankAccount.getDetails());
 
         // Frida Kahlo
@@ -70,7 +82,6 @@ public class Main {
                 new Date(1918, 7, 18),
                 new Date(2013, 12, 5));
 
-        final String fridaKahloAccountNumber = "frd123";
         final Date fridaKahloSignUpDate = new Date(1940, 1, 1);
 
         System.out.println(fridaKahlo.getName().getInitials());
@@ -83,7 +94,7 @@ public class Main {
                 fridaKahlo.getBirthDate(),
                 fridaKahlo.getDeathDate(),
                 fridaKahloSignUpDate,
-                fridaKahloAccountNumber
+                default_clientID
         );
 
         System.out.println(fridaKahloBankClient.getDetails());
@@ -92,15 +103,13 @@ public class Main {
                 fridaKahloBankClient,
                 500,
                 1907,
-                fridaKahloAccountNumber,
+                "frd123",
                 fridaKahloSignUpDate,
                 new Date(1954, 7, 13)
         );
 
         System.out.println(fridaKahloBankAccount.getDetails());
-
         fridaKahloBankAccount.withdraw(50, 1907);
-
         System.out.println(fridaKahloBankAccount.getDetails());
 
         // Jackie Chan
@@ -109,7 +118,6 @@ public class Main {
                 new Date(1954, 4, 7)
         );
 
-        final String jackieChanAccountNumber = "chan789";
         final Date jackieChanSignUpDate = new Date(1980, 8, 1);
 
         System.out.println(jackieChan.getName().getInitials());
@@ -121,7 +129,7 @@ public class Main {
                 jackieChan.getName(),
                 jackieChan.getBirthDate(),
                 jackieChanSignUpDate,
-                jackieChanAccountNumber
+                default_clientID
         );
 
         System.out.println(jackieChanBankClient.getDetails());
@@ -130,14 +138,13 @@ public class Main {
                 jackieChanBankClient,
                 3000,
                 1954,
-                jackieChanAccountNumber,
+                "chan789",
                 jackieChanSignUpDate
         );
 
         System.out.println(jackieChanBankAccount.getDetails());
-
         jackieChanBankAccount.withdraw(500, 1954);
-
         System.out.println(jackieChanBankAccount.getDetails());
+
     }
 }
