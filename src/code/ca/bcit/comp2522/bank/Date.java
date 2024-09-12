@@ -48,7 +48,8 @@ public class Date {
      * @param month month
      * @param day day
      */
-    public Date(final int year, final int month, final int day) {
+    public Date(final int year, final int month, final int day)
+    {
         validateDate(year, month, day);
 
         this.year = year;
@@ -60,7 +61,8 @@ public class Date {
      * Returns day (string) on which this date occurs on.
      * @return day of the week
      */
-    public String getDayOfTheWeek() {
+    public String getDayOfTheWeek()
+    {
         /** Get last two digits of year */
         final int oneHundred;
         oneHundred = 100;
@@ -137,7 +139,8 @@ public class Date {
      * @param month
      * @param day
      */
-    private static void validateDate(final int year, final int month, final int day) {
+    private static void validateDate(final int year, final int month, final int day)
+    {
         validateYear(year);
         validateMonth(month);
         validateDay(year, month, day);
@@ -263,21 +266,23 @@ public class Date {
      * @param month month
      * @return month (month)
      */
-    private static String monthToString(final int month) {
-        switch (month) {
-            case JANUARY: return "january";
-            case FEBRUARY: return "february";
-            case MARCH: return "march";
-            case APRIL: return "april";
-            case MAY: return "may";
-            case JUNE: return "june";
-            case JULY: return "july";
-            case AUGUST: return "august";
-            case SEPTEMBER: return "september";
-            case OCTOBER: return "october";
-            case NOVEMBER: return "november";
-            case DECEMBER: return "december";
-            default: return "invalid month";
+    private static String monthToString(final int month)
+    {
+        switch(month)
+        {
+            case JANUARY:       return "january";
+            case FEBRUARY:      return "february";
+            case MARCH:         return "march";
+            case APRIL:         return "april";
+            case MAY:           return "may";
+            case JUNE:          return "june";
+            case JULY:          return "july";
+            case AUGUST:        return "august";
+            case SEPTEMBER:     return "september";
+            case OCTOBER:       return "october";
+            case NOVEMBER:      return "november";
+            case DECEMBER:      return "december";
+            default:            return "invalid month";
         }
     }
 
@@ -286,12 +291,13 @@ public class Date {
      * @param month month
      * @return month code
      */
-    private static int monthCode(final int month) {
-        final int one;
-        one = 1;
+    private static int monthCode(final int month)
+    {
+        final int oneIndex;
+        oneIndex = 1;
 
         final String monthCode;
-        monthCode = MONTH_CODES.substring(month - one, month);
+        monthCode = MONTH_CODES.substring(month - oneIndex, month);
 
         return Integer.valueOf(monthCode);
     }
@@ -300,7 +306,8 @@ public class Date {
      * Year getter.
      * @return year
      */
-    public int getYear() {
+    public int getYear()
+    {
         return year;
     }
 
@@ -308,7 +315,8 @@ public class Date {
      * Month getter.
      * @return month (number)
      */
-    public int getMonth() {
+    public int getMonth()
+    {
         return month;
     }
 
@@ -316,7 +324,8 @@ public class Date {
      * Gets string representation of month.
      * @return month (string)
      */
-    public String getMonthString() {
+    public String getMonthString()
+    {
         return monthToString(this.getMonth());
     }
 
@@ -324,7 +333,8 @@ public class Date {
      * Day getter.
      * @return day
      */
-    public int getDay() {
+    public int getDay()
+    {
         return day;
     }
 
@@ -332,7 +342,8 @@ public class Date {
      * Returns string representation of date in YYYY-MM-DD format.
      * @return YYYY-MM-DD string
      */
-    public String getYYYYMMDD() {
+    public String getYYYYMMDD()
+    {
         return year + "-" + month + "-" + day;
     }
 
@@ -341,17 +352,19 @@ public class Date {
      * @return Month DD, YYYY string
      */
     @Override
-    public String toString() {
-        String month = this.getMonthString();
+    public String toString()
+    {
+        String monthString;
+        monthString = this.getMonthString();
 
         /** Capitalize first letter*/
-        final int zero;
-        zero = 0;
+        final int zeroIndex;
+        zeroIndex = 0;
 
-        final int one;
-        one = 1;
+        final int oneIndex;
+        oneIndex = 1;
 
-        String formattedMonth = month.substring(zero, one).toUpperCase() + month.substring(1);
+        String formattedMonth = monthString.substring(zeroIndex, oneIndex).toUpperCase() + monthString.substring(oneIndex);
 
         return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
     }
@@ -360,7 +373,8 @@ public class Date {
      * Returns string representation of date in day, Month DD, YYYY format.
      * @return day, Month DD, YYYY string
      */
-    public String getDayAndDateString() {
-        return String.format("%s, %s", this.getDayOfTheWeek(), this.toString());
+    public String getDayAndDateString()
+    {
+        return String.format("%s, %s", getDayOfTheWeek(), toString());
     }
 }

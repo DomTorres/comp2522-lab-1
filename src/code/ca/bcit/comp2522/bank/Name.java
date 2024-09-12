@@ -38,7 +38,10 @@ public class Name {
     * Must be less than the maximum name length.*/
     private static void validateFirstName(final String firstName)
     {
-        if (firstName == null || firstName.isBlank() || firstName.length() >= MAX_NAME_LENGTH || firstName.toLowerCase().contains("admin"))
+        if(firstName == null ||
+                firstName.isBlank() ||
+                firstName.length() >= MAX_NAME_LENGTH ||
+                firstName.toLowerCase().contains("admin"))
         {
             throw new IllegalArgumentException("Invalid First Name: " + firstName);
         }
