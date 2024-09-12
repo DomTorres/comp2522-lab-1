@@ -59,8 +59,12 @@ public class BankClient extends Person {
      * Must be within the minimum and maximum Client ID length */
     private void validateClientID(final String clientID)
     {
-        if (clientID == null || clientID.isBlank() ||
-                !clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$"))
+        final String validClientIDRegex;
+        validClientIDRegex = "^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$";
+
+        if (clientID == null ||
+            clientID.isBlank() ||
+            !clientID.matches(validClientIDRegex))
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }

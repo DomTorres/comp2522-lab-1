@@ -6,35 +6,35 @@ package ca.bcit.comp2522.bank;
  * @version 1.0
  */
 public class Date {
-    private static final int JANUARY = 1;
-    private static final int FEBRUARY = 2;
-    private static final int MARCH = 3;
-    private static final int APRIL = 4;
-    private static final int MAY = 5;
-    private static final int JUNE = 6;
-    private static final int JULY = 7;
-    private static final int AUGUST = 8;
-    private static final int SEPTEMBER = 9;
-    private static final int OCTOBER = 10;
-    private static final int NOVEMBER = 11;
-    private static final int DECEMBER = 12;
+    private static final int JANUARY    = 1;
+    private static final int FEBRUARY   = 2;
+    private static final int MARCH      = 3;
+    private static final int APRIL      = 4;
+    private static final int MAY        = 5;
+    private static final int JUNE       = 6;
+    private static final int JULY       = 7;
+    private static final int AUGUST     = 8;
+    private static final int SEPTEMBER  = 9;
+    private static final int OCTOBER    = 10;
+    private static final int NOVEMBER   = 11;
+    private static final int DECEMBER   = 12;
 
-    private static final int SATURDAY = 0;
-    private static final int SUNDAY = 1;
-    private static final int MONDAY = 2;
-    private static final int TUESDAY = 3;
-    private static final int WEDNESDAY = 4;
-    private static final int THURSDAY = 5;
-    private static final int FRIDAY = 6;
+    private static final int SATURDAY   = 0;
+    private static final int SUNDAY     = 1;
+    private static final int MONDAY     = 2;
+    private static final int TUESDAY    = 3;
+    private static final int WEDNESDAY  = 4;
+    private static final int THURSDAY   = 5;
+    private static final int FRIDAY     = 6;
 
-    private static final int FIRST_YEAR = 1800;
-    private static final int CURRENT_YEAR = 2024;
+    private static final int FIRST_YEAR     = 1800;
+    private static int currentYear          = 2024;
 
-    private static final int FIRST_MONTH = 1;
-    private static final int LAST_MONTH = 12;
+    private static final int FIRST_MONTH    = 1;
+    private static final int LAST_MONTH     = 12;
 
     private static final int FIRST_DAY = 1;
-    private static int LAST_DAY;
+    private static int lastDay;
 
     private static final String MONTH_CODES = "144025036146";
 
@@ -144,12 +144,12 @@ public class Date {
     }
 
     /**
-     * This function validates the year by checking if FIRST_YEAR <= year <= CURRENT_YEAR.
+     * This function validates the year by checking if FIRST_YEAR <= year <= currentYear.
      * @param year year
      * @throws IllegalArgumentException if year invalid
      */
     private static void validateYear(final int year) {
-        if (!(FIRST_YEAR <= year && year <= CURRENT_YEAR)) {
+        if (!(FIRST_YEAR <= year && year <= currentYear)) {
             throw new IllegalArgumentException("Invalid year: " + year);
         }
     }
@@ -166,14 +166,14 @@ public class Date {
     }
 
     /**
-     * This function validates the day by getting the LAST_DAY for specific month, then checking if FIRST_DAY <= day <= LAST_DAY.
+     * This function validates the day by getting the lastDay for specific month, then checking if FIRST_DAY <= day <= lastDay.
      * @param day day
      * @throws IllegalArgumentException if day invalid
      */
     private static void validateDay(final int year, final int month, final int day) {
-        LAST_DAY = daysInMonth(month, isLeapYear(year));
+        lastDay = daysInMonth(month, isLeapYear(year));
 
-        if(!(FIRST_DAY <= day && day <= LAST_DAY)) {
+        if(!(FIRST_DAY <= day && day <= lastDay)) {
             throw new IllegalArgumentException("Invalid day: " + day);
         }
     }
@@ -185,28 +185,28 @@ public class Date {
      * @return number of days in month
      */
     private static int daysInMonth(final int month, final boolean isLeapYear) {
-        final int thirtyOneDays;
-        thirtyOneDays = 31;
+        final int thirtyOneDaysInMonth;
+        thirtyOneDaysInMonth = 31;
 
-        final int thirtyDays;
-        thirtyDays = 30;
+        final int thirtyDaysInMonth;
+        thirtyDaysInMonth = 30;
 
-        final int twentyEightDays;
-        twentyEightDays = 28;
+        final int twentyEightDaysInMonth;
+        twentyEightDaysInMonth = 28;
 
-        final int twentyNineDays;
-        twentyNineDays = 29;
+        final int twentyNineDaysInMonth;
+        twentyNineDaysInMonth = 29;
 
         switch (monthToString(month)) {
             case "january", "march", "may", "july", "august", "october", "december":
-                return thirtyOneDays;
+                return thirtyOneDaysInMonth;
             case "april", "june", "september", "november":
-                return thirtyDays;
+                return thirtyDaysInMonth;
             case "february":
                 if (isLeapYear) {
-                    return twentyNineDays;
+                    return twentyNineDaysInMonth;
                 } else {
-                    return twentyEightDays;
+                    return twentyEightDaysInMonth;
                 }
             default:
                 return 0;
@@ -228,12 +228,15 @@ public class Date {
         final int fourYears;
         fourYears = 4;
 
-        if (year % fourHundredYears == 0) {
+        final int no_remainder;
+        no_remainder = 0;
+
+        if (year % fourHundredYears == no_remainder) {
             return true;
-        } else if (year % oneHundredYears == 0) {
+        } else if (year % oneHundredYears == no_remainder) {
             return false;
         } else {
-            return year % fourYears == 0;
+            return year % fourYears == no_remainder;
         }
     }
 
@@ -287,7 +290,10 @@ public class Date {
         final int one;
         one = 1;
 
-        return Integer.valueOf(MONTH_CODES.substring(month - one, month));
+        final String monthCode;
+        monthCode = MONTH_CODES.substring(month - one, month);
+
+        return Integer.valueOf(monthCode);
     }
 
     /**
