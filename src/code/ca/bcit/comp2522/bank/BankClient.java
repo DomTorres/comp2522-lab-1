@@ -2,9 +2,6 @@ package ca.bcit.comp2522.bank;
 
 public class BankClient extends Person {
 
-    private static final int MIN_CLIENT_ID_LEN = 6;
-    private static final int MAX_CLIENT_ID_LEN = 7;
-
     private final Date signupDate;
     private final String clientID;
 
@@ -59,8 +56,7 @@ public class BankClient extends Person {
      * Must be within the minimum and maximum Client ID length */
     private void validateClientID(final String clientID)
     {
-        if (clientID == null || clientID.isBlank() || clientID.length() < MIN_CLIENT_ID_LEN
-                || clientID.length() > MAX_CLIENT_ID_LEN)
+        if (clientID == null || clientID.isBlank() || !clientID.matches("^\\d{6,7}$"))
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }
