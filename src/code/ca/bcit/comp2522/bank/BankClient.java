@@ -5,8 +5,8 @@ public class BankClient extends Person {
     private static final int MIN_CLIENT_ID_LEN = 6;
     private static final int MAX_CLIENT_ID_LEN = 7;
 
-    private final Date signupDate;
-    private final String clientID;
+    private final Date      signupDate;
+    private final String    clientID;
 
     /**
      * Constructs a new BankClient with the specified name, birthdate, death date,
@@ -18,18 +18,18 @@ public class BankClient extends Person {
      * @param signupDate    The date the client signed up.
      * @param clientID      The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name name,
-                      final Date birthDate,
-                      final Date deathDate,
-                      final Date signupDate,
-                      final String clientID)
+    public BankClient(final Name    name,
+                      final Date    birthDate,
+                      final Date    deathDate,
+                      final Date    signupDate,
+                      final String  clientID)
     {
         super(name, birthDate, deathDate);
 
         validateClientID(clientID);
 
         this.signupDate = signupDate;
-        this.clientID = clientID;
+        this.clientID   = clientID;
     }
 
     /**
@@ -41,30 +41,30 @@ public class BankClient extends Person {
      * @param signupDate    The date the client signed up.
      * @param clientID      The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name name,
-                      final Date birthDate,
-                      final Date signupDate,
-                      final String clientID)
+    public BankClient(final Name    name,
+                      final Date    birthDate,
+                      final Date    signupDate,
+                      final String  clientID)
     {
         super(name, birthDate, null);
 
         validateClientID(clientID);
 
         this.signupDate = signupDate;
-        this.clientID = clientID;
+        this.clientID   = clientID;
     }
 
     /* Validates the ClientID.
      * Cannot be blank or null.
-     * Must be within the minimum and maximum Client ID length */
-    private void validateClientID(final String clientID)
+     * Must be within the minimum and maximum Client ID length
+     * @param clientID is the client's identification number
+     * @throws IllegalArgumentException when it is not a valid client ID
+     * */
+    private static void validateClientID(final String clientID)
+            throws IllegalArgumentException
     {
-        final String validClientIDRegex;
-        validClientIDRegex = "^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$";
-
-        if (clientID == null ||
-            clientID.isBlank() ||
-            !clientID.matches(validClientIDRegex))
+        if(clientID == null || clientID.isBlank() ||
+                !clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$"))
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }
@@ -84,7 +84,9 @@ public class BankClient extends Person {
         if (isAlive())
         {
             details.append("(alive) ");
-        } else {
+        }
+        else
+        {
             details.append("(not alive) ");
         }
 

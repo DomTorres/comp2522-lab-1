@@ -14,12 +14,12 @@ public class BankAccount {
     private static final int MIN_ACCOUNT_NUMBER_LEN = 6;
     private static final int MAX_ACCOUNT_NUMBER_LEN = 7;
 
-    private final BankClient client;
-    private double balanceUSD;
-    private final int pin;
-    private final String accountNumber;
-    private final Date dateOpened;
-    private final Date dateClosed;
+    private final   BankClient  client;
+    private final   int         pin;
+    private final   String      accountNumber;
+    private final   Date        dateOpened;
+    private final   Date        dateClosed;
+    private         double      balanceUSD;
 
     /**
      * Constructs a new BankAccount with a BankClient object, balance, pin,
@@ -32,20 +32,20 @@ public class BankAccount {
      * @param dateClosed    is the date when the bank account was closed.
      */
     public BankAccount(final BankClient client,
-                       final double balanceUSD,
-                       final int pin,
-                       final String accountNumber,
-                       final Date dateOpened,
-                       final Date dateClosed)
+                       final double     balanceUSD,
+                       final int        pin,
+                       final String     accountNumber,
+                       final Date       dateOpened,
+                       final Date       dateClosed)
     {
         validateAccountNumber(accountNumber);
 
-        this.client = client;
-        this.balanceUSD = balanceUSD;
-        this.pin = pin;
-        this.accountNumber = accountNumber;
-        this.dateOpened = dateOpened;
-        this.dateClosed = dateClosed;
+        this.client         = client;
+        this.balanceUSD     = balanceUSD;
+        this.pin            = pin;
+        this.accountNumber  = accountNumber;
+        this.dateOpened     = dateOpened;
+        this.dateClosed     = dateClosed;
     }
 
     /**
@@ -60,20 +60,24 @@ public class BankAccount {
      * @param dateOpened    is the date when the bank account was opened.
      */
     public BankAccount(final BankClient client,
-                       final double balanceUSD,
-                       final int pin,
-                       final String accountNumber,
-                       final Date dateOpened)
+                       final double     balanceUSD,
+                       final int        pin,
+                       final String     accountNumber,
+                       final Date       dateOpened)
     {
         this(client, balanceUSD, pin, accountNumber, dateOpened, null);
     }
 
     /* Validates the Account Number.
-    * Cannot be blank or null.
-    * Must be within the minimum and maximum account number length */
-    private void validateAccountNumber(String accountNumber)
+     * Cannot be blank or null.
+     * Must be within the minimum and maximum account number length
+     * @param accountNumber is the account number for the BankClient
+     * @throws IllegalArgumentException for invalid account numbers
+     */
+    private static void validateAccountNumber(String accountNumber)
+            throws IllegalArgumentException
     {
-        if (accountNumber == null ||
+        if(accountNumber == null ||
                 accountNumber.isBlank() ||
                 accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN ||
                 accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN)
@@ -87,15 +91,22 @@ public class BankAccount {
      * the BankAccount pin.
      * @param amountUSD     is the amount to withdraw from the account in USD.
      * @param pinToMatch    is the pin used to authenticate the user.
+     * @throws IllegalArgumentException when pin does not match.
      */
     public void withdraw(final double amountUSD, final int pinToMatch)
+            throws IllegalArgumentException
     {
-        if (pin != pinToMatch) {
+        if (pin != pinToMatch)
+        {
             throw new IllegalArgumentException("Invalid pin: " + pinToMatch);
-        } else if (balanceUSD < amountUSD) {
+        }
+        else if (balanceUSD < amountUSD)
+        {
             throw new IllegalArgumentException("Withdraw amount of " + amountUSD
                     + " exceeds Account Balance of " + balanceUSD);
-        } else {
+        }
+        else
+        {
             balanceUSD = balanceUSD - amountUSD;
         }
     }
@@ -103,26 +114,32 @@ public class BankAccount {
     /**
      * Sends the user an error message because a pin was not inputted.
      * @param amountUSD     is the amount to withdraw from the account in USD.
+     * @throws IllegalArgumentException no pin was inputted.
      */
     public void withdraw(final double amountUSD)
+            throws IllegalArgumentException
     {
         throw new IllegalArgumentException("No pin inputted.");
     }
 
     /**
      * Deposits the given amount in USD to the account balance if the correct pin is given.
-     * @param amountUSD     is the amount to be deposited from the account in USD.
-     * @param pinToMatch    is the pin used to authenticate the user.
-     * @return
+     *
+     * @param amountUSD  is the amount to be deposited from the account in USD.
+     * @param pinToMatch is the pin used to authenticate the user.
+     * @throws IllegalArgumentException if pin does not match.
      */
-    public double deposit(final double amountUSD, final int pinToMatch)
+    public void deposit(final double amountUSD, final int pinToMatch)
+            throws IllegalArgumentException
     {
-        if (pin != pinToMatch) {
+        if(pin != pinToMatch)
+        {
             throw (new IllegalArgumentException("Invalid pin: " + pinToMatch));
-        } else {
+        }
+        else
+        {
             balanceUSD = balanceUSD + amountUSD;
         }
-        return balanceUSD;
     }
 
     /**
@@ -135,11 +152,12 @@ public class BankAccount {
 
         details = String.format("%s had $%.2f USD in account #%s which was opened on %s %s",
                 client.getName().getFullName(), balanceUSD, accountNumber, dateOpened.getDayOfTheWeek(),
-                dateOpened.toString());
+                dateOpened);
 
-        if (dateClosed != null) {
+        if (dateClosed != null)
+        {
             details += String.format(" and closed %s %s.",
-                    dateClosed.getDayOfTheWeek(), dateClosed.toString());
+                    dateClosed.getDayOfTheWeek(), dateClosed);
         }
 
         return details;
