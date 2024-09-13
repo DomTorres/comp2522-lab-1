@@ -8,32 +8,32 @@ package ca.bcit.comp2522.bank;
  */
 public class Date
 {
-    private static final int JANUARY = 1;
-    private static final int FEBRUARY = 2;
-    private static final int MARCH = 3;
-    private static final int APRIL = 4;
-    private static final int MAY = 5;
-    private static final int JUNE = 6;
-    private static final int JULY = 7;
-    private static final int AUGUST = 8;
-    private static final int SEPTEMBER = 9;
-    private static final int OCTOBER = 10;
-    private static final int NOVEMBER = 11;
-    private static final int DECEMBER = 12;
+    private static final int JANUARY    = 1;
+    private static final int FEBRUARY   = 2;
+    private static final int MARCH      = 3;
+    private static final int APRIL      = 4;
+    private static final int MAY        = 5;
+    private static final int JUNE       = 6;
+    private static final int JULY       = 7;
+    private static final int AUGUST     = 8;
+    private static final int SEPTEMBER  = 9;
+    private static final int OCTOBER    = 10;
+    private static final int NOVEMBER   = 11;
+    private static final int DECEMBER   = 12;
 
-    private static final int SATURDAY = 0;
-    private static final int SUNDAY = 1;
-    private static final int MONDAY = 2;
-    private static final int TUESDAY = 3;
-    private static final int WEDNESDAY = 4;
-    private static final int THURSDAY = 5;
-    private static final int FRIDAY = 6;
+    private static final int SATURDAY   = 0;
+    private static final int SUNDAY     = 1;
+    private static final int MONDAY     = 2;
+    private static final int TUESDAY    = 3;
+    private static final int WEDNESDAY  = 4;
+    private static final int THURSDAY   = 5;
+    private static final int FRIDAY     = 6;
 
     private static final int FIRST_YEAR = 1800;
-    private static int currentYear = 2024;
+    private static int currentYear      = 2024;
 
-    private static final int FIRST_MONTH = 1;
-    private static final int LAST_MONTH = 12;
+    private static final int FIRST_MONTH    = 1;
+    private static final int LAST_MONTH     = 12;
 
     private static final int FIRST_DAY = 1;
     private static int lastDay;
