@@ -1,57 +1,66 @@
 package ca.bcit.comp2522.bank;
 
-public class BankClient extends Person {
-
+/**
+ * The BankClient class represents a client in a banking system.
+ * It extends the Person class and includes additional information
+ * specific to a banking client such as the sign-up date and a client ID.
+ *
+ * @see Person
+ * @author John and Dom
+ * @version 1.0
+ */
+public class BankClient extends Person
+{
     private static final int MIN_CLIENT_ID_LEN = 6;
     private static final int MAX_CLIENT_ID_LEN = 7;
 
-    private final Date      signupDate;
-    private final String    clientID;
+    private final Date signupDate;
+    private final String clientID;
 
     /**
      * Constructs a new BankClient with the specified name, birthdate, death date,
      * signup date, and client ID.
      *
-     * @param name          The name of the client.
-     * @param birthDate     The date of birth of the client.
-     * @param deathDate     The death date of the client or null.
-     * @param signupDate    The date the client signed up.
-     * @param clientID      The client ID, which must be a String of 6 or 7 digits.
+     * @param name       The name of the client.
+     * @param birthDate  The date of birth of the client.
+     * @param deathDate  The death date of the client or null.
+     * @param signupDate The date the client signed up.
+     * @param clientID   The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name    name,
-                      final Date    birthDate,
-                      final Date    deathDate,
-                      final Date    signupDate,
-                      final String  clientID)
+    public BankClient(final Name name,
+                      final Date birthDate,
+                      final Date deathDate,
+                      final Date signupDate,
+                      final String clientID)
     {
         super(name, birthDate, deathDate);
 
         validateClientID(clientID);
 
         this.signupDate = signupDate;
-        this.clientID   = clientID;
+        this.clientID = clientID;
     }
 
     /**
      * Constructs a new BankClient with the specified name, birthdate, signup date,
      * and client ID.
      *
-     * @param name          The name of the client.
-     * @param birthDate     The birthdate of the client.
-     * @param signupDate    The date the client signed up.
-     * @param clientID      The client ID, which must be a String of 6 or 7 digits.
+     * @param name       The name of the client.
+     * @param birthDate  The birthdate of the client.
+     * @param signupDate The date the client signed up.
+     * @param clientID   The client ID, which must be a String of 6 or 7 digits.
      */
-    public BankClient(final Name    name,
-                      final Date    birthDate,
-                      final Date    signupDate,
-                      final String  clientID)
+    public BankClient(final Name name,
+                      final Date birthDate,
+                      final Date signupDate,
+                      final String clientID)
     {
         super(name, birthDate, null);
 
         validateClientID(clientID);
 
         this.signupDate = signupDate;
-        this.clientID   = clientID;
+        this.clientID = clientID;
     }
 
     /* Validates the ClientID.
@@ -63,8 +72,10 @@ public class BankClient extends Person {
     private static void validateClientID(final String clientID)
             throws IllegalArgumentException
     {
-        if(clientID == null || clientID.isBlank() ||
-                !clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$"))
+        final boolean idIsBlank;
+        idIsBlank = clientID.isBlank();
+
+        if(clientID == null || idIsBlank || !clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$"))
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }
@@ -72,6 +83,7 @@ public class BankClient extends Person {
 
     /**
      * Returns a String containing the details of the bank client.
+     *
      * @return a String representing the details of the bank client.
      */
     @Override
@@ -81,7 +93,7 @@ public class BankClient extends Person {
 
         details.append(String.format("%s client #%s ", getName().getFullName(), clientID));
 
-        if (isAlive())
+        if(isAlive())
         {
             details.append("(alive) ");
         }
@@ -97,17 +109,21 @@ public class BankClient extends Person {
 
     /**
      * Returns the signupDate
+     *
      * @return the signupDate
      */
-    public Date getSignupDate() {
+    public Date getSignupDate()
+    {
         return signupDate;
     }
 
     /**
      * Returns the clientID
+     *
      * @return the clientID
      */
-    public String getClientID() {
+    public String getClientID()
+    {
         return clientID;
     }
 }

@@ -113,7 +113,7 @@ public class BankAccount {
 
     /**
      * Sends the user an error message because a pin was not inputted.
-     * @param amountUSD     is the amount to withdraw from the account in USD.
+     * @param amountUSD is the amount to withdraw from the account in USD.
      * @throws IllegalArgumentException no pin was inputted.
      */
     public void withdraw(final double amountUSD)
@@ -151,8 +151,8 @@ public class BankAccount {
         String details;
 
         details = String.format("%s had $%.2f USD in account #%s which was opened on %s %s",
-                client.getName().getFullName(), balanceUSD, accountNumber, dateOpened.getDayOfTheWeek(),
-                dateOpened);
+                client.getName().getFullName(), balanceUSD, accountNumber,
+                dateOpened.getDayOfTheWeek(), dateOpened);
 
         if (dateClosed != null)
         {

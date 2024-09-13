@@ -28,7 +28,7 @@ public class Person
     }
 
     /**
-     * The Person Constuctor that initializes the object.
+     * The Person Constructor that initializes the object.
      * This constructor is used when the death date is not provided and
      * assumes that the Person is still alive.
      *
