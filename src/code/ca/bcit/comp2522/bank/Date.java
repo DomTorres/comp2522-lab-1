@@ -2,7 +2,8 @@ package ca.bcit.comp2522.bank;
 
 /**
  * This class represents a valid date.
- * @author Dom Torres
+ * @author John
+ * @author Dom
  * @version 1.0
  */
 public class Date {
@@ -63,51 +64,54 @@ public class Date {
      */
     public String getDayOfTheWeek()
     {
-        /** Get last two digits of year */
+        /* Get last two digits of year */
         final int oneHundred;
         oneHundred = 100;
 
         int lastTwoDigitsOfYear;
         lastTwoDigitsOfYear = year % oneHundred;
 
-        /** 1. Calculate number of twelves */
+        /* 1. Calculate number of twelves */
         final int twelve;
         twelve = 12;
 
         int step1;
         step1 = lastTwoDigitsOfYear / twelve;
 
-        /** 2. Calculate remainder from step 1 */
+        /* 2. Calculate remainder from step 1 */
         int step2;
         step2 = lastTwoDigitsOfYear - (step1 * twelve);
 
-        /** 3. Calculate number of fours from step 2 */
+        /* 3. Calculate number of fours from step 2 */
         final int four;
         four = 4;
 
         int step3;
         step3 = step2 / four;
 
-        /** 4. Add day of month */
+        /* 4. Add day of month */
         int step4;
         step4 = day;
 
-        /** 5. Add month code */
+        /* 5. Add month code */
         int step5;
         step5 = monthCode(month);
 
-        /** 6. Add previous 5 numbers and mod by 7 */
+        /* 6. Add previous 5 numbers and mod by 7 */
         int number = step1 + step2 + step3 + step4 + step5;
 
-        /** for January/February dates in leap years, add 6 at the start */
+        /* for January/February dates in leap years, add 6 at the start */
         final int six;
         six = 6;
 
-        if ((month == JANUARY || month == FEBRUARY) && isLeapYear(year)) {
+        final boolean leapYear;
+        leapYear = isLeapYear(year);
+        
+        if ((month == JANUARY || month == FEBRUARY) && leapYear) {
             number += six;
         }
 
-        /** for all dates in the 2000s, add 6 at the start */
+        /* for all dates in the 2000s, add 6 at the start */
         final int year2000;
         year2000 = 2000;
 
@@ -115,7 +119,7 @@ public class Date {
             number += six;
         }
 
-        /** for all dates in the 1800s, add 2 at the start */
+        /* for all dates in the 1800s, add 2 at the start */
         final int two;
         two = 2;
 
@@ -133,11 +137,11 @@ public class Date {
         return dayOfTheWeekToString(number % daysInWeek);
     }
 
-    /**
+    /*
      * This function validates the date by calling respective validator methods
-     * @param year
-     * @param month
-     * @param day
+     * @param year year
+     * @param month month
+     * @param day day
      */
     private static void validateDate(final int year, final int month, final int day)
     {
@@ -146,13 +150,13 @@ public class Date {
         validateDay(year, month, day);
     }
 
-    /**
+    /*
      * This function validates the year by checking if FIRST_YEAR <= year <= currentYear.
      * @param year year
      * @throws IllegalArgumentException if year invalid
      */
     private static void validateYear(final int year)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
         if (!(FIRST_YEAR <= year && year <= currentYear))
         {
@@ -160,13 +164,13 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function validates the year by checking if FIRST_MONTH <= year <= CURRENT_MONTH.
      * @param month month
      * @throws IllegalArgumentException if month invalid
      */
     private static void validateMonth(final int month)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
         if (!(FIRST_MONTH <= month && month <= LAST_MONTH))
         {
@@ -174,13 +178,13 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function validates the day by getting the lastDay for specific month, then checking if FIRST_DAY <= day <= lastDay.
      * @param day day
      * @throws IllegalArgumentException if day invalid
      */
     private static void validateDay(final int year, final int month, final int day)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
         lastDay = daysInMonth(month, isLeapYear(year));
 
@@ -190,7 +194,7 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function returns the number of days in a month.
      * @param month month
      * @param isLeapYear if leap year
@@ -225,7 +229,7 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function determines if a year is a leap year.
      * @param year year
      * @return if leap year
@@ -252,7 +256,7 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function converts the day number to a String.
      * @param day day
      * @return day (String)
@@ -270,7 +274,7 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function converts the months number to a String.
      * @param month month
      * @return month (month)
@@ -295,7 +299,7 @@ public class Date {
         }
     }
 
-    /**
+    /*
      * This function returns the month code for a month.
      * @param month month
      * @return month code
