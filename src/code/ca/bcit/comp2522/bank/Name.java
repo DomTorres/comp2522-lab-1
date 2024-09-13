@@ -22,6 +22,7 @@ public class Name
     /**
      * This is the Name Constructor that validates and initializes
      * the firstName and lastName.
+     *
      * @param firstName is the first name
      * @param lastName  is the last name
      */
@@ -31,8 +32,8 @@ public class Name
         validateFirstName(firstName);
         validateLastName(lastName);
 
-        this.firstName  = firstName;
-        this.lastName   = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     /*
@@ -49,9 +50,9 @@ public class Name
             throw new IllegalArgumentException("firstName is null");
         }
 
-        boolean firstNameIsBlank        = firstName.isBlank();
-        boolean firstNameLongerThanMax  = firstName.length() >= MAX_NAME_LENGTH;
-        boolean firstNameContainsAdmin  = firstName.toLowerCase().contains("admin");
+        boolean firstNameIsBlank = firstName.isBlank();
+        boolean firstNameLongerThanMax = firstName.length() >= MAX_NAME_LENGTH;
+        boolean firstNameContainsAdmin = firstName.toLowerCase().contains("admin");
 
         if(firstNameIsBlank || firstNameLongerThanMax || firstNameContainsAdmin)
         {
@@ -67,13 +68,14 @@ public class Name
     private static void validateLastName(final String lastName)
             throws IllegalArgumentException
     {
-        if(lastName == null) {
+        if(lastName == null)
+        {
             throw new IllegalArgumentException("lastName is null");
         }
 
-        boolean lastNameIsBlank         = lastName.isBlank();
-        boolean lastNameLongerThanMax   = lastName.length() >= MAX_NAME_LENGTH;
-        boolean lastNameContainsAdmin   = lastName.toLowerCase().contains("admin");
+        boolean lastNameIsBlank = lastName.isBlank();
+        boolean lastNameLongerThanMax = lastName.length() >= MAX_NAME_LENGTH;
+        boolean lastNameContainsAdmin = lastName.toLowerCase().contains("admin");
 
         if(lastNameIsBlank || lastNameLongerThanMax || lastNameContainsAdmin)
         {
@@ -83,6 +85,7 @@ public class Name
 
     /**
      * Returns the first name.
+     *
      * @return the first name
      */
     public String getFirst()
@@ -92,6 +95,7 @@ public class Name
 
     /**
      * Returns the last name.
+     *
      * @return the last name
      */
     public String getLast()
@@ -102,6 +106,7 @@ public class Name
     /**
      * Returns the initials of the full name.
      * The Initials are capitalized and separated by a period.
+     *
      * @return the initials of the full name
      */
     public String getInitials()
@@ -114,36 +119,38 @@ public class Name
 
     /**
      * Returns the full name with the first letter of the first and last name capitalized and the rest lower case.
+     *
      * @return the full name
      */
     public String getFullName()
     {
         String formattedFirstName =
                 firstName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
-                firstName.substring(ONE_INDEX).toLowerCase();
+                        firstName.substring(ONE_INDEX).toLowerCase();
 
         String formattedLastName =
                 lastName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
-                lastName.substring(ONE_INDEX).toLowerCase();
+                        lastName.substring(ONE_INDEX).toLowerCase();
 
         return formattedFirstName + " " + formattedLastName;
     }
 
     /**
      * Returns the full name in reverse order.
+     *
      * @return the full name in reverse order.
      */
     public String getReverseName()
     {
-        StringBuilder reverseFirst  = new StringBuilder();
-        StringBuilder reverseLast   = new StringBuilder();
+        StringBuilder reverseFirst = new StringBuilder();
+        StringBuilder reverseLast = new StringBuilder();
 
-        for (int i = firstName.length() - ONE_INDEX; i >= ZERO_INDEX; i--)
+        for(int i = firstName.length() - ONE_INDEX; i >= ZERO_INDEX; i--)
         {
             reverseFirst.append(firstName.charAt(i));
         }
 
-        for (int i = lastName.length() - ONE_INDEX; i >= ZERO_INDEX; i--)
+        for(int i = lastName.length() - ONE_INDEX; i >= ZERO_INDEX; i--)
         {
             reverseLast.append(lastName.charAt(i));
         }

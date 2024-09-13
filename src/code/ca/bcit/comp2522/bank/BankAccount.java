@@ -9,21 +9,23 @@ package ca.bcit.comp2522.bank;
  * @author John & Dom
  * @version 1.0
  */
-public class BankAccount {
+public class BankAccount
+{
 
     private static final int MIN_ACCOUNT_NUMBER_LEN = 6;
     private static final int MAX_ACCOUNT_NUMBER_LEN = 7;
 
-    private final   BankClient  client;
-    private final   int         pin;
-    private final   String      accountNumber;
-    private final   Date        dateOpened;
-    private final   Date        dateClosed;
-    private         double      balanceUSD;
+    private final BankClient client;
+    private final int pin;
+    private final String accountNumber;
+    private final Date dateOpened;
+    private final Date dateClosed;
+    private double balanceUSD;
 
     /**
      * Constructs a new BankAccount with a BankClient object, balance, pin,
      * account number, date opened and closed.
+     *
      * @param client        is the BankClient who owns the account.
      * @param balanceUSD    is the initial balance of the bank account.
      * @param pin           is the pin of the bank account.
@@ -32,20 +34,20 @@ public class BankAccount {
      * @param dateClosed    is the date when the bank account was closed.
      */
     public BankAccount(final BankClient client,
-                       final double     balanceUSD,
-                       final int        pin,
-                       final String     accountNumber,
-                       final Date       dateOpened,
-                       final Date       dateClosed)
+                       final double balanceUSD,
+                       final int pin,
+                       final String accountNumber,
+                       final Date dateOpened,
+                       final Date dateClosed)
     {
         validateAccountNumber(accountNumber);
 
-        this.client         = client;
-        this.balanceUSD     = balanceUSD;
-        this.pin            = pin;
-        this.accountNumber  = accountNumber;
-        this.dateOpened     = dateOpened;
-        this.dateClosed     = dateClosed;
+        this.client = client;
+        this.balanceUSD = balanceUSD;
+        this.pin = pin;
+        this.accountNumber = accountNumber;
+        this.dateOpened = dateOpened;
+        this.dateClosed = dateClosed;
     }
 
     /**
@@ -53,6 +55,7 @@ public class BankAccount {
      * account number, date opened.
      * This constructor assumes that the bank account has not been closed and
      * sets the dateClosed to null.
+     *
      * @param client        is the BankClient who owns the account.
      * @param balanceUSD    is the initial balance of the bank account.
      * @param pin           is the pin of the bank account.
@@ -60,10 +63,10 @@ public class BankAccount {
      * @param dateOpened    is the date when the bank account was opened.
      */
     public BankAccount(final BankClient client,
-                       final double     balanceUSD,
-                       final int        pin,
-                       final String     accountNumber,
-                       final Date       dateOpened)
+                       final double balanceUSD,
+                       final int pin,
+                       final String accountNumber,
+                       final Date dateOpened)
     {
         this(client, balanceUSD, pin, accountNumber, dateOpened, null);
     }
@@ -77,10 +80,20 @@ public class BankAccount {
     private static void validateAccountNumber(String accountNumber)
             throws IllegalArgumentException
     {
-        if(accountNumber == null ||
-                accountNumber.isBlank() ||
-                accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN ||
-                accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN)
+        if (accountNumber == null)  {
+            throw new IllegalArgumentException("account number is null");
+        }
+
+        final boolean accountNumberLongerThanMax;
+        accountNumberLongerThanMax = accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN;
+
+        final boolean accountNumberShorterThanMin;
+        accountNumberShorterThanMin = accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN;
+
+        final boolean accountNumberIsBlank;
+        accountNumberIsBlank = accountNumber.isBlank();
+
+        if(accountNumberIsBlank || accountNumberShorterThanMin || accountNumberLongerThanMax)
         {
             throw new IllegalArgumentException("Invalid Client ID:" + accountNumber);
         }
@@ -89,18 +102,19 @@ public class BankAccount {
     /**
      * Removes the amount in USD from the account balance if the pin matches
      * the BankAccount pin.
-     * @param amountUSD     is the amount to withdraw from the account in USD.
-     * @param pinToMatch    is the pin used to authenticate the user.
+     *
+     * @param amountUSD  is the amount to withdraw from the account in USD.
+     * @param pinToMatch is the pin used to authenticate the user.
      * @throws IllegalArgumentException when pin does not match.
      */
     public void withdraw(final double amountUSD, final int pinToMatch)
             throws IllegalArgumentException
     {
-        if (pin != pinToMatch)
+        if(pin != pinToMatch)
         {
             throw new IllegalArgumentException("Invalid pin: " + pinToMatch);
         }
-        else if (balanceUSD < amountUSD)
+        else if(balanceUSD < amountUSD)
         {
             throw new IllegalArgumentException("Withdraw amount of " + amountUSD
                     + " exceeds Account Balance of " + balanceUSD);
@@ -113,6 +127,7 @@ public class BankAccount {
 
     /**
      * Sends the user an error message because a pin was not inputted.
+     *
      * @param amountUSD is the amount to withdraw from the account in USD.
      * @throws IllegalArgumentException no pin was inputted.
      */
@@ -144,6 +159,7 @@ public class BankAccount {
 
     /**
      * Returns a String containing the details of the BankAccount.
+     *
      * @return a String representing the details of the BankAccount.
      */
     public String getDetails()
@@ -154,7 +170,7 @@ public class BankAccount {
                 client.getName().getFullName(), balanceUSD, accountNumber,
                 dateOpened.getDayOfTheWeek(), dateOpened);
 
-        if (dateClosed != null)
+        if(dateClosed != null)
         {
             details += String.format(" and closed %s %s.",
                     dateClosed.getDayOfTheWeek(), dateClosed);

@@ -87,6 +87,7 @@ public class Person
 
     /**
      * Returns the birthdate.
+     *
      * @return the birthdate.
      */
     public Date getBirthDate()
@@ -96,6 +97,7 @@ public class Person
 
     /**
      * Returns the deathdate.
+     *
      * @return the deathdate.
      */
     public Date getDeathDate()

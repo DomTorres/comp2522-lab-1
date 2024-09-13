@@ -5,9 +5,9 @@ package ca.bcit.comp2522.bank;
  * It extends the Person class and includes additional information
  * specific to a banking client such as the sign-up date and a client ID.
  *
- * @see Person
  * @author John and Dom
  * @version 1.0
+ * @see Person
  */
 public class BankClient extends Person
 {
@@ -72,7 +72,8 @@ public class BankClient extends Person
     private static void validateClientID(final String clientID)
             throws IllegalArgumentException
     {
-        if (clientID == null) {
+        if(clientID == null)
+        {
             throw new IllegalArgumentException("Client ID cannot be null");
         }
 

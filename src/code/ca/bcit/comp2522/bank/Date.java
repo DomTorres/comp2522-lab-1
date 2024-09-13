@@ -2,36 +2,38 @@ package ca.bcit.comp2522.bank;
 
 /**
  * This class represents a valid date.
+ *
  * @author Dom Torres
  * @version 1.0
  */
-public class Date {
-    private static final int JANUARY    = 1;
-    private static final int FEBRUARY   = 2;
-    private static final int MARCH      = 3;
-    private static final int APRIL      = 4;
-    private static final int MAY        = 5;
-    private static final int JUNE       = 6;
-    private static final int JULY       = 7;
-    private static final int AUGUST     = 8;
-    private static final int SEPTEMBER  = 9;
-    private static final int OCTOBER    = 10;
-    private static final int NOVEMBER   = 11;
-    private static final int DECEMBER   = 12;
+public class Date
+{
+    private static final int JANUARY = 1;
+    private static final int FEBRUARY = 2;
+    private static final int MARCH = 3;
+    private static final int APRIL = 4;
+    private static final int MAY = 5;
+    private static final int JUNE = 6;
+    private static final int JULY = 7;
+    private static final int AUGUST = 8;
+    private static final int SEPTEMBER = 9;
+    private static final int OCTOBER = 10;
+    private static final int NOVEMBER = 11;
+    private static final int DECEMBER = 12;
 
-    private static final int SATURDAY   = 0;
-    private static final int SUNDAY     = 1;
-    private static final int MONDAY     = 2;
-    private static final int TUESDAY    = 3;
-    private static final int WEDNESDAY  = 4;
-    private static final int THURSDAY   = 5;
-    private static final int FRIDAY     = 6;
+    private static final int SATURDAY = 0;
+    private static final int SUNDAY = 1;
+    private static final int MONDAY = 2;
+    private static final int TUESDAY = 3;
+    private static final int WEDNESDAY = 4;
+    private static final int THURSDAY = 5;
+    private static final int FRIDAY = 6;
 
-    private static final int FIRST_YEAR     = 1800;
-    private static int currentYear          = 2024;
+    private static final int FIRST_YEAR = 1800;
+    private static int currentYear = 2024;
 
-    private static final int FIRST_MONTH    = 1;
-    private static final int LAST_MONTH     = 12;
+    private static final int FIRST_MONTH = 1;
+    private static final int LAST_MONTH = 12;
 
     private static final int FIRST_DAY = 1;
     private static int lastDay;
@@ -44,9 +46,10 @@ public class Date {
 
     /**
      * Date constructor.
-     * @param year year
+     *
+     * @param year  year
      * @param month month
-     * @param day day
+     * @param day   day
      */
     public Date(final int year, final int month, final int day)
     {
@@ -59,6 +62,7 @@ public class Date {
 
     /**
      * Returns day (string) on which this date occurs on.
+     *
      * @return day of the week
      */
     public String getDayOfTheWeek()
@@ -103,7 +107,8 @@ public class Date {
         final int six;
         six = 6;
 
-        if ((month == JANUARY || month == FEBRUARY) && isLeapYear(year)) {
+        if((month == JANUARY || month == FEBRUARY) && isLeapYear(year))
+        {
             number += six;
         }
 
@@ -111,7 +116,8 @@ public class Date {
         final int year2000;
         year2000 = 2000;
 
-        if (year >= year2000) {
+        if(year >= year2000)
+        {
             number += six;
         }
 
@@ -125,7 +131,8 @@ public class Date {
         final int year1900;
         year1900 = 1900;
 
-        if (year1800 <= year && year < year1900) {
+        if(year1800 <= year && year < year1900)
+        {
             number += two;
         }
 
@@ -135,6 +142,7 @@ public class Date {
 
     /**
      * This function validates the date by calling respective validator methods
+     *
      * @param year
      * @param month
      * @param day
@@ -148,13 +156,14 @@ public class Date {
 
     /**
      * This function validates the year by checking if FIRST_YEAR <= year <= currentYear.
+     *
      * @param year year
      * @throws IllegalArgumentException if year invalid
      */
     private static void validateYear(final int year)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
-        if (!(FIRST_YEAR <= year && year <= currentYear))
+        if(!(FIRST_YEAR <= year && year <= currentYear))
         {
             throw new IllegalArgumentException("Invalid year: " + year);
         }
@@ -162,13 +171,14 @@ public class Date {
 
     /**
      * This function validates the year by checking if FIRST_MONTH <= year <= CURRENT_MONTH.
+     *
      * @param month month
      * @throws IllegalArgumentException if month invalid
      */
     private static void validateMonth(final int month)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
-        if (!(FIRST_MONTH <= month && month <= LAST_MONTH))
+        if(!(FIRST_MONTH <= month && month <= LAST_MONTH))
         {
             throw new IllegalArgumentException("Invalid month: " + month);
         }
@@ -176,11 +186,12 @@ public class Date {
 
     /**
      * This function validates the day by getting the lastDay for specific month, then checking if FIRST_DAY <= day <= lastDay.
+     *
      * @param day day
      * @throws IllegalArgumentException if day invalid
      */
     private static void validateDay(final int year, final int month, final int day)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
         lastDay = daysInMonth(month, isLeapYear(year));
 
@@ -192,11 +203,13 @@ public class Date {
 
     /**
      * This function returns the number of days in a month.
-     * @param month month
+     *
+     * @param month      month
      * @param isLeapYear if leap year
      * @return number of days in month
      */
-    private static int daysInMonth(final int month, final boolean isLeapYear) {
+    private static int daysInMonth(final int month, final boolean isLeapYear)
+    {
         final int thirtyOneDaysInMonth;
         thirtyOneDaysInMonth = 31;
 
@@ -209,15 +222,19 @@ public class Date {
         final int twentyNineDaysInMonth;
         twentyNineDaysInMonth = 29;
 
-        switch (monthToString(month)) {
+        switch(monthToString(month))
+        {
             case "january", "march", "may", "july", "august", "october", "december":
                 return thirtyOneDaysInMonth;
             case "april", "june", "september", "november":
                 return thirtyDaysInMonth;
             case "february":
-                if (isLeapYear) {
+                if(isLeapYear)
+                {
                     return twentyNineDaysInMonth;
-                } else {
+                }
+                else
+                {
                     return twentyEightDaysInMonth;
                 }
             default:
@@ -227,10 +244,12 @@ public class Date {
 
     /**
      * This function determines if a year is a leap year.
+     *
      * @param year year
      * @return if leap year
      */
-    private static boolean isLeapYear(final int year) {
+    private static boolean isLeapYear(final int year)
+    {
         final int fourHundredYears;
         fourHundredYears = 400;
 
@@ -243,35 +262,52 @@ public class Date {
         final int no_remainder;
         no_remainder = 0;
 
-        if (year % fourHundredYears == no_remainder) {
+        if(year % fourHundredYears == no_remainder)
+        {
             return true;
-        } else if (year % oneHundredYears == no_remainder) {
+        }
+        else if(year % oneHundredYears == no_remainder)
+        {
             return false;
-        } else {
+        }
+        else
+        {
             return year % fourYears == no_remainder;
         }
     }
 
     /**
      * This function converts the day number to a String.
+     *
      * @param day day
      * @return day (String)
      */
-    private static String dayOfTheWeekToString(final int day) {
-        switch (day) {
-            case SATURDAY: return "saturday";
-            case SUNDAY: return "sunday";
-            case MONDAY: return "monday";
-            case TUESDAY: return "tuesday";
-            case WEDNESDAY: return "wednesday";
-            case THURSDAY: return "thursday";
-            case FRIDAY: return "friday";
-            default: return "invalid day";
+    private static String dayOfTheWeekToString(final int day)
+    {
+        switch(day)
+        {
+            case SATURDAY:
+                return "saturday";
+            case SUNDAY:
+                return "sunday";
+            case MONDAY:
+                return "monday";
+            case TUESDAY:
+                return "tuesday";
+            case WEDNESDAY:
+                return "wednesday";
+            case THURSDAY:
+                return "thursday";
+            case FRIDAY:
+                return "friday";
+            default:
+                return "invalid day";
         }
     }
 
     /**
      * This function converts the months number to a String.
+     *
      * @param month month
      * @return month (month)
      */
@@ -279,24 +315,38 @@ public class Date {
     {
         switch(month)
         {
-            case JANUARY:       return "january";
-            case FEBRUARY:      return "february";
-            case MARCH:         return "march";
-            case APRIL:         return "april";
-            case MAY:           return "may";
-            case JUNE:          return "june";
-            case JULY:          return "july";
-            case AUGUST:        return "august";
-            case SEPTEMBER:     return "september";
-            case OCTOBER:       return "october";
-            case NOVEMBER:      return "november";
-            case DECEMBER:      return "december";
-            default:            return "invalid month";
+            case JANUARY:
+                return "january";
+            case FEBRUARY:
+                return "february";
+            case MARCH:
+                return "march";
+            case APRIL:
+                return "april";
+            case MAY:
+                return "may";
+            case JUNE:
+                return "june";
+            case JULY:
+                return "july";
+            case AUGUST:
+                return "august";
+            case SEPTEMBER:
+                return "september";
+            case OCTOBER:
+                return "october";
+            case NOVEMBER:
+                return "november";
+            case DECEMBER:
+                return "december";
+            default:
+                return "invalid month";
         }
     }
 
     /**
      * This function returns the month code for a month.
+     *
      * @param month month
      * @return month code
      */
@@ -313,6 +363,7 @@ public class Date {
 
     /**
      * Year getter.
+     *
      * @return year
      */
     public int getYear()
@@ -322,6 +373,7 @@ public class Date {
 
     /**
      * Month getter.
+     *
      * @return month (number)
      */
     public int getMonth()
@@ -331,6 +383,7 @@ public class Date {
 
     /**
      * Gets string representation of month.
+     *
      * @return month (string)
      */
     public String getMonthString()
@@ -340,6 +393,7 @@ public class Date {
 
     /**
      * Day getter.
+     *
      * @return day
      */
     public int getDay()
@@ -349,6 +403,7 @@ public class Date {
 
     /**
      * Returns string representation of date in YYYY-MM-DD format.
+     *
      * @return YYYY-MM-DD string
      */
     public String getYYYYMMDD()
@@ -358,6 +413,7 @@ public class Date {
 
     /**
      * Returns string representation of date in Month DD, YYYY format.
+     *
      * @return Month DD, YYYY string
      */
     @Override
@@ -380,6 +436,7 @@ public class Date {
 
     /**
      * Returns string representation of date in day, Month DD, YYYY format.
+     *
      * @return day, Month DD, YYYY string
      */
     public String getDayAndDateString()
