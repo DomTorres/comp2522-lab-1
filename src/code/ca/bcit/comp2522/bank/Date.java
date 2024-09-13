@@ -107,7 +107,10 @@ public class Date
         final int six;
         six = 6;
 
-        if((month == JANUARY || month == FEBRUARY) && isLeapYear(year))
+        final boolean isYearALeapYear;
+        isYearALeapYear = isLeapYear(year);
+
+        if((month == JANUARY || month == FEBRUARY) && isYearALeapYear)
         {
             number += six;
         }
