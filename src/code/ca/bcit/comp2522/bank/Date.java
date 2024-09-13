@@ -151,8 +151,11 @@ public class Date {
      * @param year year
      * @throws IllegalArgumentException if year invalid
      */
-    private static void validateYear(final int year) {
-        if (!(FIRST_YEAR <= year && year <= currentYear)) {
+    private static void validateYear(final int year)
+        throws IllegalArgumentException
+    {
+        if (!(FIRST_YEAR <= year && year <= currentYear))
+        {
             throw new IllegalArgumentException("Invalid year: " + year);
         }
     }
@@ -162,8 +165,11 @@ public class Date {
      * @param month month
      * @throws IllegalArgumentException if month invalid
      */
-    private static void validateMonth(final int month) {
-        if (!(FIRST_MONTH <= month && month <= LAST_MONTH)) {
+    private static void validateMonth(final int month)
+        throws IllegalArgumentException
+    {
+        if (!(FIRST_MONTH <= month && month <= LAST_MONTH))
+        {
             throw new IllegalArgumentException("Invalid month: " + month);
         }
     }
@@ -173,10 +179,13 @@ public class Date {
      * @param day day
      * @throws IllegalArgumentException if day invalid
      */
-    private static void validateDay(final int year, final int month, final int day) {
+    private static void validateDay(final int year, final int month, final int day)
+        throws IllegalArgumentException
+    {
         lastDay = daysInMonth(month, isLeapYear(year));
 
-        if(!(FIRST_DAY <= day && day <= lastDay)) {
+        if(!(FIRST_DAY <= day && day <= lastDay))
+        {
             throw new IllegalArgumentException("Invalid day: " + day);
         }
     }
