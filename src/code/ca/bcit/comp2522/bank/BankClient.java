@@ -72,10 +72,17 @@ public class BankClient extends Person
     private static void validateClientID(final String clientID)
             throws IllegalArgumentException
     {
+        if (clientID == null) {
+            throw new IllegalArgumentException("Client ID cannot be null");
+        }
+
         final boolean idIsBlank;
         idIsBlank = clientID.isBlank();
 
-        if(clientID == null || idIsBlank || !clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$"))
+        final boolean isValidClientID;
+        isValidClientID = clientID.matches("^\\d{" + MIN_CLIENT_ID_LEN + "," + MAX_CLIENT_ID_LEN + "}$");
+
+        if(idIsBlank || !isValidClientID)
         {
             throw (new IllegalArgumentException("Invalid Client ID:" + clientID));
         }
