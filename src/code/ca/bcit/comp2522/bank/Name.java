@@ -64,7 +64,8 @@ public class Name
      * Validates the Last Name. Cannot be null, blank, or "admin".
      * Must be less than the maximum name length.
      * @param lastName is the last name
-     * @throws IllegalArgumentException when it does not follow the name criteria*/
+     * @throws IllegalArgumentException when it does not follow the name criteria
+     * */
     private static void validateLastName(final String lastName)
             throws IllegalArgumentException
     {
@@ -124,15 +125,20 @@ public class Name
      */
     public String getFullName()
     {
-        String formattedFirstName =
+        final String formattedFirstName;
+        formattedFirstName =
                 firstName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
                         firstName.substring(ONE_INDEX).toLowerCase();
 
-        String formattedLastName =
+        final String formattedLastName;
+        formattedLastName =
                 lastName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
                         lastName.substring(ONE_INDEX).toLowerCase();
 
-        return formattedFirstName + " " + formattedLastName;
+        final String formattedFullName;
+        formattedFullName = formattedFirstName + " " + formattedLastName;
+
+        return formattedFullName;
     }
 
     /**
