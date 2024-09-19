@@ -75,22 +75,19 @@ public class BankAccount
      * Cannot be blank or null.
      * Must be within the minimum and maximum account number length
      * @param accountNumber is the account number for the BankClient
-     * @throws IllegalArgumentException for invalid account numbers
      */
     private static void validateAccountNumber(String accountNumber)
-            throws IllegalArgumentException
     {
         if (accountNumber == null)  {
             throw new IllegalArgumentException("account number is null");
         }
 
         final boolean accountNumberLongerThanMax;
-        accountNumberLongerThanMax = accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN;
-
         final boolean accountNumberShorterThanMin;
-        accountNumberShorterThanMin = accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN;
-
         final boolean accountNumberIsBlank;
+
+        accountNumberLongerThanMax = accountNumber.length() > MAX_ACCOUNT_NUMBER_LEN;
+        accountNumberShorterThanMin = accountNumber.length() < MIN_ACCOUNT_NUMBER_LEN;
         accountNumberIsBlank = accountNumber.isBlank();
 
         if(accountNumberIsBlank || accountNumberShorterThanMin || accountNumberLongerThanMax)
@@ -103,18 +100,22 @@ public class BankAccount
      * Removes the amount in USD from the account balance if the pin matches
      * the BankAccount pin.
      *
-     * @param amountUSD  is the amount to withdraw from the account in USD.
-     * @param pinToMatch is the pin used to authenticate the user.
-     * @throws IllegalArgumentException when pin does not match.
+     * @param amountUSD                     is the amount to withdraw from the account in USD.
+     * @param pinToMatch                    is the pin used to authenticate the user.
      */
     public void withdraw(final double amountUSD, final int pinToMatch)
-            throws IllegalArgumentException
     {
-        if(pin != pinToMatch)
+        final boolean pinMatches;
+        final boolean insufficientFunds;
+
+        pinMatches = pin == pinToMatch;
+        insufficientFunds = balanceUSD < amountUSD;
+
+        if(!pinMatches)
         {
             throw new IllegalArgumentException("Invalid pin: " + pinToMatch);
         }
-        else if(balanceUSD < amountUSD)
+        else if(insufficientFunds)
         {
             throw new IllegalArgumentException("Withdraw amount of " + amountUSD
                     + " exceeds Account Balance of " + balanceUSD);
@@ -129,10 +130,8 @@ public class BankAccount
      * Sends the user an error message because a pin was not inputted.
      *
      * @param amountUSD is the amount to withdraw from the account in USD.
-     * @throws IllegalArgumentException no pin was inputted.
      */
     public void withdraw(final double amountUSD)
-            throws IllegalArgumentException
     {
         throw new IllegalArgumentException("No pin inputted.");
     }
@@ -142,12 +141,13 @@ public class BankAccount
      *
      * @param amountUSD  is the amount to be deposited from the account in USD.
      * @param pinToMatch is the pin used to authenticate the user.
-     * @throws IllegalArgumentException if pin does not match.
      */
     public void deposit(final double amountUSD, final int pinToMatch)
-            throws IllegalArgumentException
     {
-        if(pin != pinToMatch)
+        final boolean pinMatches;
+        pinMatches = pin == pinToMatch;
+
+        if(!pinMatches)
         {
             throw (new IllegalArgumentException("Invalid pin: " + pinToMatch));
         }
@@ -164,18 +164,23 @@ public class BankAccount
      */
     public String getDetails()
     {
-        String details;
+        final StringBuilder details;
+        final boolean accountClosed;
 
-        details = String.format("%s had $%.2f USD in account #%s which was opened on %s %s",
+        details = new StringBuilder();
+
+        details.append(String.format("%s had $%.2f USD in account #%s which was opened on %s %s",
                 client.getName().getFullName(), balanceUSD, accountNumber,
-                dateOpened.getDayOfTheWeek(), dateOpened);
+                dateOpened.getDayOfTheWeek(), dateOpened));
 
-        if(dateClosed != null)
+        accountClosed = dateClosed != null;
+
+        if(accountClosed)
         {
-            details += String.format(" and closed %s %s.",
-                    dateClosed.getDayOfTheWeek(), dateClosed);
+            details.append(String.format(" and closed %s %s.",
+                    dateClosed.getDayOfTheWeek(), dateClosed));
         }
 
-        return details;
+        return details.toString();
     }
 }

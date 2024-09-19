@@ -67,10 +67,8 @@ public class BankClient extends Person
      * Cannot be blank or null.
      * Must be within the minimum and maximum Client ID length
      * @param clientID is the client's identification number
-     * @throws IllegalArgumentException when it is not a valid client ID
      * */
     private static void validateClientID(final String clientID)
-            throws IllegalArgumentException
     {
         if(clientID == null)
         {

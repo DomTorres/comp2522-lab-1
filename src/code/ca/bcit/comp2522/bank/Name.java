@@ -40,10 +40,8 @@ public class Name
      * Validates the First Name. It cannot be null, blank, or "admin".
      * Must be less than the maximum name length
      * @param firstName is the first name
-     * @throws IllegalArgumentException when it does not follow the name criteria.
      */
     private static void validateFirstName(final String firstName)
-            throws IllegalArgumentException
     {
         if(firstName == null)
         {
@@ -68,10 +66,8 @@ public class Name
      * Validates the Last Name. Cannot be null, blank, or "admin".
      * Must be less than the maximum name length.
      * @param lastName is the last name
-     * @throws IllegalArgumentException when it does not follow the name criteria
      * */
     private static void validateLastName(final String lastName)
-            throws IllegalArgumentException
     {
         if(lastName == null)
         {

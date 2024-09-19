@@ -177,10 +177,8 @@ public class Date
      * This function validates the year by checking if FIRST_YEAR <= year <= currentYear.
      *
      * @param year year
-     * @throws IllegalArgumentException if year invalid
      */
     private static void validateYear(final int year)
-            throws IllegalArgumentException
     {
         if(!(FIRST_YEAR <= year && year <= currentYear))
         {
@@ -192,10 +190,8 @@ public class Date
      * This function validates the year by checking if FIRST_MONTH <= year <= CURRENT_MONTH.
      *
      * @param month month
-     * @throws IllegalArgumentException if month invalid
      */
     private static void validateMonth(final int month)
-            throws IllegalArgumentException
     {
         if(!(FIRST_MONTH <= month && month <= LAST_MONTH))
         {
@@ -208,10 +204,8 @@ public class Date
      * then checking if FIRST_DAY <= day <= lastDay.
      *
      * @param day day
-     * @throws IllegalArgumentException if day invalid
      */
     private static void validateDay(final int year, final int month, final int day)
-            throws IllegalArgumentException
     {
         lastDay = daysInMonth(month, isLeapYear(year));
 
