@@ -51,7 +51,10 @@ public class Date
      * @param month month
      * @param day   day
      */
-    public Date(final int year, final int month, final int day)
+    public Date(
+            final int year,
+            final int month,
+            final int day)
     {
         validateDate(year, month, day);
 
@@ -61,7 +64,20 @@ public class Date
     }
 
     /**
-     * Returns day (string) on which this date occurs on.
+     * To get the day of the week, do the following seven steps for dates in the 1900s:
+     * e.g. October 31 1977:
+     * step 1: calculate the number of twelves in 77:
+     * 6
+     * step 2: calculate the remainder from step 1: 77 - 12*6 = 77 - 72 =
+     * 5
+     * step 3: calculate the number of fours in step 2: 5/4 = 1.25, so
+     * 1
+     * step 4: add the day of the month to each step above: 31 + 6 + 5 + 1 =
+     * 43
+     * step 5: add the month code (for jfmamjjasond: 144025036146): for october it is 1: 43 + 1 =
+     * 44
+     * step 6: add the previous five numbers: (44) and mod by 7: 44%7 = 2 (44/7 = 6 remainder 2)
+     * step 7: sat sun mon tue wed thu fri is 0 1 2 3 4 5 6; our 2 means Oct 31 1977 was monday
      *
      * @return day of the week
      */
@@ -188,7 +204,8 @@ public class Date
     }
 
     /**
-     * This function validates the day by getting the lastDay for specific month, then checking if FIRST_DAY <= day <= lastDay.
+     * This function validates the day by getting the lastDay for specific month,
+     * then checking if FIRST_DAY <= day <= lastDay.
      *
      * @param day day
      * @throws IllegalArgumentException if day invalid
@@ -432,7 +449,8 @@ public class Date
         final int oneIndex;
         oneIndex = 1;
 
-        String formattedMonth = monthString.substring(zeroIndex, oneIndex).toUpperCase() + monthString.substring(oneIndex);
+        String formattedMonth = monthString.substring(zeroIndex, oneIndex).toUpperCase() +
+                                monthString.substring(oneIndex);
 
         return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
     }
