@@ -50,9 +50,13 @@ public class Name
             throw new IllegalArgumentException("firstName is null");
         }
 
-        boolean firstNameIsBlank = firstName.isBlank();
-        boolean firstNameLongerThanMax = firstName.length() >= MAX_NAME_LENGTH;
-        boolean firstNameContainsAdmin = firstName.toLowerCase().contains("admin");
+        final boolean firstNameIsBlank;
+        final boolean firstNameLongerThanMax;
+        final boolean firstNameContainsAdmin;
+
+        firstNameIsBlank = firstName.isBlank();
+        firstNameLongerThanMax = firstName.length() >= MAX_NAME_LENGTH;
+        firstNameContainsAdmin = firstName.toLowerCase().contains("admin");
 
         if(firstNameIsBlank || firstNameLongerThanMax || firstNameContainsAdmin)
         {
@@ -74,9 +78,13 @@ public class Name
             throw new IllegalArgumentException("lastName is null");
         }
 
-        boolean lastNameIsBlank = lastName.isBlank();
-        boolean lastNameLongerThanMax = lastName.length() >= MAX_NAME_LENGTH;
-        boolean lastNameContainsAdmin = lastName.toLowerCase().contains("admin");
+        final boolean lastNameIsBlank;
+        final boolean lastNameLongerThanMax;
+        final boolean lastNameContainsAdmin;
+
+        lastNameIsBlank = lastName.isBlank();
+        lastNameLongerThanMax = lastName.length() >= MAX_NAME_LENGTH;
+        lastNameContainsAdmin = lastName.toLowerCase().contains("admin");
 
         if(lastNameIsBlank || lastNameLongerThanMax || lastNameContainsAdmin)
         {
@@ -112,10 +120,15 @@ public class Name
      */
     public String getInitials()
     {
-        String firstNameInitial = firstName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase();
-        String lastNameInitial = lastName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase();
+        final String firstNameInitial;
+        final String lastNameInitial;
+        final String initials;
 
-        return firstNameInitial + "." + lastNameInitial + ".";
+        firstNameInitial = firstName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase();
+        lastNameInitial = lastName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase();
+        initials = firstNameInitial + "." + lastNameInitial + ".";
+
+        return initials;
     }
 
     /**
@@ -126,16 +139,17 @@ public class Name
     public String getFullName()
     {
         final String formattedFirstName;
+        final String formattedLastName;
+        final String formattedFullName;
+
         formattedFirstName =
                 firstName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
                         firstName.substring(ONE_INDEX).toLowerCase();
 
-        final String formattedLastName;
         formattedLastName =
                 lastName.substring(ZERO_INDEX, ONE_INDEX).toUpperCase() +
                         lastName.substring(ONE_INDEX).toLowerCase();
 
-        final String formattedFullName;
         formattedFullName = formattedFirstName + " " + formattedLastName;
 
         return formattedFullName;
@@ -148,8 +162,11 @@ public class Name
      */
     public String getReverseName()
     {
-        StringBuilder reverseFirst = new StringBuilder();
-        StringBuilder reverseLast = new StringBuilder();
+        final StringBuilder reverseFirst;
+        final StringBuilder reverseLast;
+
+        reverseFirst = new StringBuilder();
+        reverseLast = new StringBuilder();
 
         for(int i = firstName.length() - ONE_INDEX; i >= ZERO_INDEX; i--)
         {
