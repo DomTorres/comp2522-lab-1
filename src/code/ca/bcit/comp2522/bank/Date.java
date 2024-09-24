@@ -83,79 +83,81 @@ public class Date
      */
     public String getDayOfTheWeek()
     {
-        /** Get last two digits of year */
+        final int lastTwoDigitsOfYear;
+        final boolean leapYear;
+        final int daysInWeek;
+        final int step1;
+        final int step2;
+        final int step3;
+        final int step4;
+        final int step5;
+        final int two;
+        final int four;
+        final int six;
+        final int twelve;
         final int oneHundred;
-        oneHundred = 100;
+        final int year1800;
+        final int year1900;
+        final int year2000;
+        final boolean within1800s;
+        final boolean within2000s;
+        int number;
 
-        int lastTwoDigitsOfYear;
+        two         = 2;
+        four        = 4;
+        six         = 6;
+        twelve      = 12;
+        oneHundred  = 100;
+        daysInWeek  = 7;
+//        MIN_YEAR    = 1925;
+        year1800    = 1800;
+        year1900    = 1900;
+        year2000    = 2000;
+
+        within1800s = year1800 <= year && year < year1900;
+        within2000s = year >= year2000;
+
+        /* Get last two digits of year */
         lastTwoDigitsOfYear = year % oneHundred;
 
-        /** 1. Calculate number of twelves */
-        final int twelve;
-        twelve = 12;
-
-        int step1;
+        /* 1. Calculate number of twelves */
         step1 = lastTwoDigitsOfYear / twelve;
 
-        /** 2. Calculate remainder from step 1 */
-        int step2;
+        /* 2. Calculate remainder from step 1 */
         step2 = lastTwoDigitsOfYear - (step1 * twelve);
 
-        /** 3. Calculate number of fours from step 2 */
-        final int four;
-        four = 4;
-
-        int step3;
+        /* 3. Calculate number of fours from step 2 */
         step3 = step2 / four;
 
-        /** 4. Add day of month */
-        int step4;
+        /* 4. Add day of month */
         step4 = day;
 
-        /** 5. Add month code */
-        int step5;
+        /* 5. Add month code */
         step5 = monthCode(month);
 
-        /** 6. Add previous 5 numbers and mod by 7 */
-        int number = step1 + step2 + step3 + step4 + step5;
+        /* 6. Add previous 5 numbers and mod by 7 */
+        number = step1 + step2 + step3 + step4 + step5;
 
-        /** for January/February dates in leap years, add 6 at the start */
-        final int six;
-        six = 6;
+        /* for January/February dates in leap years, add 6 at the start */
+        leapYear = isLeapYear(year);
 
-        final boolean isYearALeapYear;
-        isYearALeapYear = isLeapYear(year);
-
-        if((month == JANUARY || month == FEBRUARY) && isYearALeapYear)
+        if((month == JANUARY || month == FEBRUARY) && leapYear)
         {
             number += six;
         }
 
-        /** for all dates in the 2000s, add 6 at the start */
-        final int year2000;
-        year2000 = 2000;
-
-        if(year >= year2000)
+        /* for all dates in the 2000s, add 6 at the start */
+        if(within2000s)
         {
             number += six;
         }
 
-        /** for all dates in the 1800s, add 2 at the start */
-        final int two;
-        two = 2;
-
-        final int year1800;
-        year1800 = 1800;
-
-        final int year1900;
-        year1900 = 1900;
-
-        if(year1800 <= year && year < year1900)
+        /* for all dates in the 1800s, add 2 at the start */
+        if(within1800s)
         {
             number += two;
         }
 
-        final int daysInWeek = 7;
         return dayOfTheWeekToString(number % daysInWeek);
     }
 
@@ -180,7 +182,10 @@ public class Date
      */
     private static void validateYear(final int year)
     {
-        if(!(FIRST_YEAR <= year && year <= currentYear))
+        final boolean yearWithinValidRange;
+        yearWithinValidRange = FIRST_YEAR <= year && year <= currentYear;
+
+        if(!yearWithinValidRange)
         {
             throw new IllegalArgumentException("Invalid year: " + year);
         }
@@ -193,7 +198,10 @@ public class Date
      */
     private static void validateMonth(final int month)
     {
-        if(!(FIRST_MONTH <= month && month <= LAST_MONTH))
+        final boolean monthWithinValidRange;
+        monthWithinValidRange = FIRST_MONTH <= month && month <= LAST_MONTH;
+
+        if(!monthWithinValidRange)
         {
             throw new IllegalArgumentException("Invalid month: " + month);
         }
@@ -209,7 +217,10 @@ public class Date
     {
         lastDay = daysInMonth(month, isLeapYear(year));
 
-        if(!(FIRST_DAY <= day && day <= lastDay))
+        final boolean dayWithinValidRange;
+        dayWithinValidRange = FIRST_DAY <= day && day <= lastDay;
+
+        if(!dayWithinValidRange)
         {
             throw new IllegalArgumentException("Invalid day: " + day);
         }
@@ -224,19 +235,19 @@ public class Date
      */
     private static int daysInMonth(final int month, final boolean isLeapYear)
     {
+        final String monthString;
         final int thirtyOneDaysInMonth;
-        thirtyOneDaysInMonth = 31;
-
         final int thirtyDaysInMonth;
-        thirtyDaysInMonth = 30;
-
+        final int twentyNineDaysInMonth;
         final int twentyEightDaysInMonth;
+
+        monthString = monthToString(month);
+        thirtyOneDaysInMonth = 31;
+        thirtyDaysInMonth = 30;
+        twentyNineDaysInMonth = 29;
         twentyEightDaysInMonth = 28;
 
-        final int twentyNineDaysInMonth;
-        twentyNineDaysInMonth = 29;
-
-        switch(monthToString(month))
+        switch(monthString)
         {
             case "january", "march", "may", "july", "august", "october", "december":
                 return thirtyOneDaysInMonth;
@@ -265,28 +276,34 @@ public class Date
     private static boolean isLeapYear(final int year)
     {
         final int fourHundredYears;
-        fourHundredYears = 400;
-
         final int oneHundredYears;
-        oneHundredYears = 100;
-
         final int fourYears;
-        fourYears = 4;
-
         final int no_remainder;
+
+        final boolean isMultipleOf400;
+        final boolean isMultipleOf100;
+        final boolean isMultipleOf4;
+
+        fourHundredYears = 400;
+        oneHundredYears = 100;
+        fourYears = 4;
         no_remainder = 0;
 
-        if(year % fourHundredYears == no_remainder)
+        isMultipleOf400 = year % fourHundredYears == no_remainder;
+        isMultipleOf100 = year % oneHundredYears == no_remainder;
+        isMultipleOf4 = year % fourYears == no_remainder;
+
+        if(isMultipleOf400)
         {
             return true;
         }
-        else if(year % oneHundredYears == no_remainder)
+        else if(isMultipleOf100)
         {
             return false;
         }
         else
         {
-            return year % fourYears == no_remainder;
+            return isMultipleOf4;
         }
     }
 
@@ -315,7 +332,7 @@ public class Date
             case FRIDAY:
                 return "friday";
             default:
-                return "invalid day";
+                return "Invalid day";
         }
     }
 
@@ -367,9 +384,9 @@ public class Date
     private static int monthCode(final int month)
     {
         final int oneIndex;
-        oneIndex = 1;
-
         final String monthCode;
+
+        oneIndex = 1;
         monthCode = MONTH_CODES.substring(month - oneIndex, month);
 
         return Integer.valueOf(monthCode);
@@ -433,20 +450,24 @@ public class Date
     @Override
     public String toString()
     {
-        String monthString;
+        final String monthString;
+        final int zeroIndex;
+        final int oneIndex;
+        final String formattedMonth;
+        final String formattedDate;
+
         monthString = this.getMonthString();
 
         /** Capitalize first letter*/
-        final int zeroIndex;
         zeroIndex = 0;
-
-        final int oneIndex;
         oneIndex = 1;
 
-        String formattedMonth = monthString.substring(zeroIndex, oneIndex).toUpperCase() +
+        formattedMonth = monthString.substring(zeroIndex, oneIndex).toUpperCase() +
                                 monthString.substring(oneIndex);
 
-        return String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
+        formattedDate = String.format("%s %d, %d", formattedMonth, this.getDay(), this.getYear());
+
+        return formattedDate;
     }
 
     /**

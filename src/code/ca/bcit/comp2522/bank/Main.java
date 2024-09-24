@@ -1,7 +1,7 @@
 package ca.bcit.comp2522.bank;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         final String default_clientID = "0000000";
 
         // Albert Einstein

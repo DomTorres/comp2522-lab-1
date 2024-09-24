@@ -67,7 +67,8 @@ public class Person
      */
     public String getDetails()
     {
-        final StringBuilder details = new StringBuilder();
+        final StringBuilder details;
+        details = new StringBuilder();
 
         details.append(name.getFullName());
 

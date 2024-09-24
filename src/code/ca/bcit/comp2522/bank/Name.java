@@ -160,6 +160,7 @@ public class Name
     {
         final StringBuilder reverseFirst;
         final StringBuilder reverseLast;
+        final String reverseFullName;
 
         reverseFirst = new StringBuilder();
         reverseLast = new StringBuilder();
@@ -174,6 +175,8 @@ public class Name
             reverseLast.append(lastName.charAt(i));
         }
 
-        return reverseLast + " " + reverseFirst;
+        reverseFullName = reverseLast + " " + reverseFirst;
+
+        return reverseFullName;
     }
 }
